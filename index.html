@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AulaTech</title>
+    <link rel="stylesheet" href="inicio/inicio.css">
+    <script src="inicio/inicio.js"></script>
+    <link rel="shortcut icon" href="imagenes/Logo1.png" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <div class="logo-nombre">
+            <img src="imagenes/Logo1.png" alt="Logo" class="logo">
+        </div>
+        <nav class="navbar hidden" id="navbar">
+            <ul class="menu">
+                <li><a href="inicio/index.html">Inicio</a></li>
+                <li><a href="inicio/servicios.html">Servicios</a></li>
+                <li><a href="inicio/contactanos.php">Contáctanos</a></li>
+                <li><a href="inicio/iniciosesion.php">Iniciar Sesion</a></li>
+                <li><a href="inicio/registrarse.html">Registrarse</a></li>
+            </ul>
+        </nav>
+        <img src="imagenes/menu.png" alt="NavBar" class="menuH show" id="menuH">
+    </header>
+    <main>
+        <div class="section">
+            <div class="container_principal">
+                <h1>
+                    <span class="titulo">Aula</span>
+                    <span class="titulo-1">Tech</span>
+                </h1>
+                <div class="texto-slogan">
+                    <h2>"Por la educación de hoy, y el futuro de mañana"</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="cuerpo">
+            <br><br><br>
+            <h3 class="aulatech">Más Sobre AulaTech</h3>
+            <p>AulaTech informa a la comunidad educativa, acerca del estado de la sala de informática en la Institución
+                Educativa, se encargará del mantenimiento dentro de la misma. Además, abrirá
+                una vacante de alfabetización, esto con el fin, qué los estudiantes
+                tengan la posibilidad de adquirir nuevos conocimientos y cumplir con sus responsabilidades. </p>
+            <p>También incluirá apartados con interfaces para el fácil trabajo en clase, es decir, que los estudiantes
+                podrán ver las tareas pendientes indicadas por los profesores, proporcionar información sobre su
+                computador, entre otros. Los docentes por su parte podrán subir actividades pendientes, tener la base de
+                datos de los computadores en el aula, ver el registro del uso de los mismos por estudiante y grupo,
+                además de poder subir documentos para el trabajo en clase. </p>
+        </div>
+
+        <div class="imagenes-textos">
+            <div class="imagen-texto">
+                <img src="imagenes/Sede1.jpg" alt="Imagen 1">
+                <p class="texto-color1">Vacante de alfabetización: Este servicio incluye la
+                    limpieza y revisión regular de los equipos de la sala de informática.
+                </p>
+                <p class="texto-blanco1">La limpieza y revisión regular de los computadores es fundamental para
+                    optimizar su rendimiento y prolongar la vida útil del hardware.
+                </p>
+            </div>
+            <div class="imagen-texto">
+                <img src="imagenes/Sede2.jpg" alt="Imagen 2">
+                <p class="texto-color1">Disponibilidad de la sala de cómputo: Este servicio
+                    consiste en llevar un registro de horarios.
+                </p>
+                <p class="texto-blanco1">Se hará una tabla de horarios, usos del aula de informática y de
+                    proporcionar unas fechas de disponibilidad de la misma.
+                </p>
+            </div>
+        </div>
+        <div class="social-media hidden">
+            <a href="https://www.facebook.com/share/K4UHXvcXzuzLEsnT/?mibextid=LQQJ4d" class="social-icon facebook"
+                target="_blank" aria-label="Facebook">
+                <img src="imagenes/Icono-Facebook.png" alt="Icono-Facebook">
+            </a>
+            <a href="https://www.gmail.com" class="social-icon gmail" target="_blank" aria-label="Gmail">
+                <img src="imagenes/Icono-Correo.png" alt="Icono-Correo">
+            </a>
+            <a href="https://www.instagram.com/i.e.sadep?igsh=MWYzaGJtemxzZXN5aQ==" class="social-icon instagram"
+                target="_blank" aria-label="Instagram">
+                <img src="imagenes/Icono-Instagram.png" alt="Icono-Instagram">
+            </a>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <div class="footer-section">
+                    <h4>Nombres de creadores</h4>
+                    <p>Muñoz Arteaga Miller Santiago</p>
+                    <p>Ortiz Maria Camila</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Redes Sociales</h4>
+                    <p>Facebook: <a href="https://www.facebook.com/share/K4UHXvcXzuzLEsnT/?mibextid=LQQJ4d"
+                            target="_blank">IE San Antonio de Prado</a></p>
+                    <p>Instagram: <a href="https://www.instagram.com/i.e.sadep?igsh=MWYzaGJtemxzZXN5aQ=="
+                            target="_blank">IE San Antonio de Prado</a></p>
+                    <p>Correo: <a href="https://wwww.gmail.com" target="_blank">mediatecnicasadep@gmail.com</a></p>
+                </div>
+            </div>
+            <div class="footer-logo">
+                <img src="imagenes/Logo1.png" alt="Logo" class="footer-logo-img">
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuH = document.getElementById("menuH");
+            const navbar = document.getElementById("navbar");
+
+            if (menuH) {
+                menuH.addEventListener("click", () => {
+                    navbar.classList.toggle("hidden");
+                    navbar.classList.toggle("show");
+
+                    if (navbar.classList.contains("show")) {
+                        menuH.src = "imagenes/Icono-Cancelar.png";
+                    } else {
+                        menuH.src = "imagenes/menu.png";
+                    }
+                });
+            }
+        });
+    </script>
+
+</body>
+
+</html>
