@@ -1,0 +1,280 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+body{
+    font-family: 'Helvetica Neue', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-image: url(bg.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 20px;
+}
+
+form{
+    font-family: "Roboto Condensed", sans-serif;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 380px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    background-color: rgb(14, 35, 48); 
+    position: relative; 
+    align-items: stretch;
+}
+
+h2{
+    text-align: center;
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin-bottom: 25px;
+}
+
+.atras img {
+    height: 50px;
+    width: 50px;
+}
+
+.atras {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.ojo {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+label, p{
+    font-size: 1rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+select, input {
+    font-size: 1rem;
+    color: #000000;
+    margin-bottom: 25px;
+    padding: 10px 15px;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    background-color: #fafafc;
+    outline: none;
+    width: 100%;
+    max-width: 300px;
+}
+
+.password-container {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+}
+
+.btn-1, .btn-2{
+    font-size: 1rem;
+    color: #000000;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: 100%;
+    max-width: 200px;
+    border: none;
+    border-radius: 500px;
+    padding: 10px 0;
+    background-color: #f0f0f0;
+    transition: color 0.3s ease;
+}
+
+.btn-1:hover, .btn-2:hover{
+    color: rgb(48, 109, 146);
+}
+
+.ay {
+    font-size: 1.5rem;
+}
+
+.remember{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 25px;
+}
+
+.remember a{
+    color: #ffffff;
+    font-size: 1.2rem;
+}
+
+.remember a:hover{
+    color: rgb(48, 109, 146);
+}
+
+.Iniciar {
+    font: inherit;
+    background-color: #f0f0f0;
+    border: none;
+    color: #242222;
+    border-radius: 0.5em;
+    font-size: 1.35rem;
+    padding: 0.375em 0.9em;
+    font-weight: 600;
+    text-shadow: 0 0.0625em 0 #fff;
+    box-shadow: inset 0 0.062em 0 0 #f4f4f4, 0 0.062em 0 0 #efefef,
+                0 0.125em 0 0 #ececec, 0 0.25em 0 0 #e0e0e0, 0 0.3125em 0 0 #dedede,
+                0 0.375em 0 0 #dcdcdc, 0 0.425em 0 0 #cacaca, 0 0.425em 0.5em 0 #cecece;
+    transition: 0.15s ease;
+    cursor: pointer;
+    width: 100%;
+    max-width: 65%;
+    margin-top: 15px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Iniciar p {
+    color: #ffffff;
+    font-size: 1.5rem;
+    margin-left: 10px; 
+}
+
+.Iniciar img.logo-login {
+    height: 30px;
+    width: 30px;
+}
+
+.Iniciar:active {
+    transform: translateY(0.225em);
+    box-shadow: inset 0 0.03em 0 0 #f4f4f4, 0 0.03em 0 0 #efefef,
+                0 0.0625em 0 0 #ececec, 0 0.125em 0 0 #e0e0e0, 0 0.125em 0 0 #dedede,
+                0 0.2em 0 0 #dcdcdc, 0 0.225em 0 0 #cacaca, 0 0.225em 0.375em 0 #cecece;
+}
+
+.remember{
+    margin-left: 35%;
+}
+
+.Iniciar{
+    margin-left: 15%;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.logo {
+    animation: bounce 2s infinite;
+}
+@media (max-width: 768px){
+    form{
+        padding: 30px;
+        align-items: stretch;
+    }
+    
+    
+}
+@media (max-width: 420px){
+    .form{
+
+        width: 90%;
+    }
+
+    .btn-1, .btn-2, .Iniciar {
+        max-width: 100%;
+    }
+
+    
+    
+}
+
+@media (max-width: 480px){
+    
+    .Iniciar img.logo-login {
+        display: none;
+    }
+
+    form{
+        padding: 20px;
+    }
+
+    h2{
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+    }
+
+    label, p{
+        font-size: 0.9rem;
+    }
+
+    select, input {
+        font-size: 1rem;
+        color: #000000;
+        margin-bottom: 15px;
+        padding: 10px 15px;
+        border: 1px solid #000000;
+        border-radius: 10px;
+        background-color: #fafafc;
+        outline: none;
+        width: 100%;
+        max-width: 100%; 
+    }
+
+    .remember{
+        flex-direction: column;
+        align-items: center;
+        margin-right: 20%;
+    }
+
+    .remember a{
+        font-size: 1rem;
+        margin-right: 60%;
+    }
+
+    .Iniciar {
+        max-width: 100%;
+        width: 75%;
+        
+    }
+
+    .btn-1, .btn-2{
+        max-width: 100%;
+    }
+
+    img[alt="Logo"] {
+        display: none;
+    }
+
+    .atras{
+        top: 90px;
+    }
+
+    .password-container input{
+        max-width: 110%;
+        width: 110%;
+    }
+
+    
+
+}

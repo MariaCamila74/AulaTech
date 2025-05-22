@@ -1,0 +1,451 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Felipa&family=Gupter:wght@400;500;700&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+}
+
+body {
+    margin: 0;
+    color: #000000;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    font-family: "Roboto Condensed", sans-serif;
+}
+
+header {
+    background: linear-gradient(135deg, #0b2a3b, #005c7f);
+    color: #ffffff;
+    padding: 15px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+}
+
+.logo-nombre {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 60px;
+    width: 100px;
+    margin-left: 60px;
+    border-radius: 8px;
+    transition: transform 0.3s, filter 0.3s;
+}
+
+.logo:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+.navbar {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.menu {
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li {
+    margin: 0 20px;
+}
+
+.menu a {
+    display: block;
+    padding: 10px 20px;
+    font-size: 18px;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 20px;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.menu a:hover {
+    color: #00f5e0;
+}
+
+/* Estilos del Carrusel */
+.carousel-section {
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding: 0;
+}
+
+.carousel {
+    max-width: 100%;
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.carousel-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carousel-item:nth-child(1) { animation: fadeInOut 20s 0s infinite; }
+.carousel-item:nth-child(2) { animation: fadeInOut 20s 5s infinite; }
+.carousel-item:nth-child(3) { animation: fadeInOut 20s 10s infinite; }
+.carousel-item:nth-child(4) { animation: fadeInOut 20s 15s infinite; }
+
+@keyframes fadeInOut {
+    0%, 45%, 100% { opacity: 0; }
+    50%, 95% { opacity: 1; }
+}
+
+.carousel-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 15px;
+    text-align: center;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.carousel-item:hover .carousel-caption {
+    transform: translateY(0);
+}
+
+.carousel-caption h3 {
+    margin: 0;
+    color: #333;
+    font-size: 18px;
+}
+
+.carousel-caption p {
+    margin: 5px 0 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.container {
+    padding: 20px;
+}
+
+h2 {
+    margin-top: 20px;
+    font-size: 25px;
+    color: #003366;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Estilos de la tabla */
+table {
+    width: 100%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+table th, table td {
+    padding: 12px;
+    border-bottom: 1px solid #ccc;
+}
+
+table th {
+    background-color: #004d6e;
+    color: white;
+}
+
+table td {
+    background-color: #f9f9f9;
+}
+
+label, select {
+    color: #002d3a;
+}
+
+button {
+    background-color: #003366;
+    color: white;
+    padding: 10px 20px;
+    margin-left: 35%;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0055a5;
+}
+
+form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+form input[type="text"],
+form input[type="number"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form input[type="submit"] {
+    background-color: #004d6e;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+    background-color: #002d3a;
+}
+
+.carer {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.menuH {
+    display: none;
+}
+
+footer {
+    background: linear-gradient(135deg, #0b2a3b, #005c7f);
+    color: #ffffff;
+    padding: 35px 15px;
+    text-align: center;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-logo-img {
+    height: 60px;
+    border-radius: 8px;
+    transition: transform 0.3s, filter 0.3s;
+}
+
+.footer-logo-img:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+.footer-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+.footer-section {
+    flex: 1 1 200px;
+    margin: 10px;
+    max-width: 250px;
+    text-align: left;
+}
+
+.footer-section h4 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.footer-section p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.footer-section a {
+    color: #00aeff;
+    text-decoration: none;
+    
+    transition: color 0.3s;
+}
+
+.footer-section a:hover {
+    color: #ffffff;
+}
+
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-icon {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    margin-right: 15%;
+}
+
+.search-input {
+    width: 0;
+    padding: 0;
+    margin-left: 10px;
+    transition: width 0.4s ease;
+    opacity: 0;
+    visibility: hidden;
+    height: 35px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-input.visible {
+    width: 200px;
+    padding: 5px;
+    opacity: 1;
+    visibility: visible;
+}
+
+@media screen and (max-width: 768px) {
+    .section {
+        background-repeat: no-repeat;
+        background-image: url(img/FondoPrincipal-01.png);
+        background-size: 100% 50%;
+        height: 41em;
+    }
+    
+    header {
+        padding: 15px 10px;
+        position: relative;
+        width: 100%;
+    }
+
+    h2 {
+        font-size: 30px;
+    }
+
+    .menuH {
+        display: flex;
+        width: 25px;
+        height: 25px;
+        margin-right: 30px;
+        margin-top: 15px;
+        color: white; 
+    }
+
+    .navbar.show {
+        display: inline-block;
+        align-content: space-between;
+        max-width: 100vw;
+    }
+
+    .navbar.hidden {
+        display: none;
+    }
+
+    .menu {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: block;
+    }
+
+    .carousel {
+        height: 300px;
+    }
+
+    .carousel-caption h3 {
+        font-size: 16px;
+    }
+
+    .carousel-caption p {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .logo {
+        margin-left: 0;
+        margin-top: 10px;
+        height: 40px;
+        width: auto;
+    }
+
+    .carousel {
+        height: 200px;
+    }
+
+    .carousel-caption {
+        padding: 10px;
+    }
+
+    .carousel-caption h3 {
+        font-size: 14px;
+    }
+
+    .carousel-caption p {
+        font-size: 10px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    .footer-logo-img {
+        height: 40px;
+    }
+}
+
+.menuH.close {
+    color: white;
+}
+
+.menuH.close::before {
+    content: "\2715";
+    font-size: 25px;
+    color: white;
+}
