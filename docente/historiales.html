@@ -44,5 +44,46 @@
             </div>
         </div>
     </main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <div class="footer-section">
+                    <h4>Nombres de creadores</h4>
+                    <p>Mesa Toro Juan Camilo</p>
+                    <p>Monsalve Lopera Josué</p>
+                    <p>Muñoz Arteaga Miller Santiago</p>
+                    <p>Ortiz Maria Camila</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Redes Sociales</h4>
+                    <p>Facebook: <a href="https://www.facebook.com/share/K4UHXvcXzuzLEsnT/?mibextid=LQQJ4d" target="_blank">IE San Antonio de Prado</a></p>
+                    <p>Instagram: <a href="https://www.instagram.com/i.e.sadep?igsh=MWYzaGJtemxzZXN5aQ==" target="_blank">IE San Antonio de Prado</a></p>
+                    <p>Correo: <a href="https://wwww.gmail.com" target="_blank">mediatecnicasadep@gmail.com</a></p>
+                </div>
+            </div>
+            <div class="footer-logo">
+                <img src="../imagenes/Logo1.png" alt="Logo" class="footer-logo-img">
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuH = document.getElementById("menuH");
+            const navbar = document.getElementById("navbar");
+
+            if (menuH) { 
+                menuH.addEventListener("click", () => {
+                    navbar.classList.toggle("hidden"); 
+                    navbar.classList.toggle("show");
+
+                    if (navbar.classList.contains("show")) {
+                        menuH.src = "../imagenes/Icono-Cancelar.png";
+                    } else {
+                        menuH.src = "../imagenes/menu.png";
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
