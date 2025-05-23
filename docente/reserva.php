@@ -103,10 +103,62 @@
                 });
             }
 
+            // Configuración del campo de fecha
+            const fechaInput = document.getElementById('FechaEntrega');
             
+            // Establecer fecha mínima (3 días a partir de hoy)
+            const hoy = new Date();
+            const minDate = new Date();
+            minDate.setDate(hoy.getDate() + 3);
+            
+            // Formatear para input date (YYYY-MM-DD)
+            const formatDate = (date) => {
+                const d = new Date(date);
+                let month = '' + (d.getMonth() + 1);
+                let day = '' + d.getDate();
+                const year = d.getFullYear();
+
+                if (month.length < 2) month = '0' + month;
+                if (day.length < 2) day = '0' + day;
+
+                return [year, month, day].join('-');
+            };
+
+            fechaInput.min = formatDate(minDate);
+            
+            // Validar que no sea domingo al enviar el formulario
             const form = document.getElementById('activityForm');
             form.addEventListener('submit', function(e) {
-                e.preventDefault();
+                const selectedDate = new Date(fechaInput.value);
+                const dayOfWeek = selectedDate.getDay(); // 0 es domingo, 6 es sábado
+                
+                if (dayOfWeek === 0) {
+                    e.preventDefault();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'No se permiten reservas los domingos.'
+                    });
+                    return;
+                }
+                
+                // Validar anticipación mínima de 3 días
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                const diffTime = selectedDate - today;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                
+                if (diffDays < 3) {
+                    e.preventDefault();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Debes seleccionar una fecha con al menos 3 días de anticipación.'
+                    });
+                    return;
+                }
+
+                // Si pasa las validaciones, continuar con el envío
                 const formData = new FormData(this);
 
                 fetch('actividadesPendientes.php', {
@@ -138,6 +190,21 @@
                         text: 'Hubo un problema al procesar la solicitud.'
                     });
                 });
+            });
+
+            // Deshabilitar domingos en el selector de fecha
+            fechaInput.addEventListener('input', function() {
+                const selectedDate = new Date(this.value);
+                const dayOfWeek = selectedDate.getDay();
+                
+                if (dayOfWeek === 0) {
+                    this.value = '';
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Domingo no permitido',
+                        text: 'Por favor selecciona un día entre lunes y sábado.'
+                    });
+                }
             });
         });
     </script>
