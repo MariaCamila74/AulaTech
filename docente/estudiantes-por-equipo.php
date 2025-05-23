@@ -91,6 +91,86 @@ if(!isset($_SESSION['Rol'])) {
                 </tbody>
             </table>
         </div>
+        <div>
+            <script>
+                document.getElementById('searchIcon').addEventListener('click', function() {
+                    var searchInput = document.getElementById('searchInput');
+                    if (searchInput.classList.contains('visible')) {
+                        searchInput.classList.remove('visible');
+                    } else {
+                        searchInput.classList.add('visible');
+                    }
+                });
+                document.addEventListener('DOMContentLoaded', function () {
+                    const searchInput = document.getElementById('searchInput');
+                    const tables = document.querySelectorAll('table');
+
+                    searchInput.addEventListener('keyup', function () {
+                        const filter = searchInput.value.toLowerCase();
+                        
+                        tables.forEach(function (table) {
+                            const rows = table.querySelectorAll('tbody tr');
+                            const header = table.previousElementSibling;
+
+                            let foundMatch = false;
+                            
+                            rows.forEach(function (row) {
+                                const cells = row.getElementsByTagName('td');
+                                let match = false;
+                                
+                                // Revisar cada celda de la fila
+                                for (let j = 0; j < cells.length; j++) {
+                                    const cellText = cells[j].textContent.toLowerCase();
+                                    
+                                    if (cellText.includes(filter)) {
+                                        match = true;
+                                        break;
+                                    }
+                                }
+                                
+                                row.style.display = match ? '' : 'none';
+                                if (match) {
+                                    foundMatch = true;
+                                }
+                            });
+                        
+                            header.style.display = foundMatch ? '' : 'none';
+                        });
+                    });
+                });
+            </script>
+            <div class="container">
+                <h2 class="titulo">Uso de los computadores</h2>
+                <table id="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Serie</th>
+                            <th>Marca</th>
+                            <th>Grupo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr>";
+                                echo "<td>" . htmlspecialchars($row['ID']) . "</td>";
+                                echo "<td>" . htmlspecialchars($row['Nombre']) . "</td>";
+                                echo "<td>" . htmlspecialchars($row['MarcaComputador']) . "</td>";
+                                echo "<td>" . htmlspecialchars($row['NumeroSerie']) . "</td>";
+                                echo "<td>" . htmlspecialchars($row['Grupo']) . "</td>";
+                                echo "</tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='4'>No hay datos registrados</td></tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
     <footer>
