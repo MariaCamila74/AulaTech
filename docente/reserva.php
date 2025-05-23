@@ -110,7 +110,7 @@
                 let fechaMinima = new Date(hoy);
                 
                 // Agregamos 3 días hábiles (excluyendo domingos)
-                while (diasAgregados < 3) {
+                while (diasAgregados < 4) {
                     fechaMinima.setDate(fechaMinima.getDate() + 1);
                     // Si no es domingo (0), contamos como día hábil
                     if (fechaMinima.getDay() !== 0) {
