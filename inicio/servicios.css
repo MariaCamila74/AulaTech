@@ -249,6 +249,27 @@ h2::after {
     transition: background-color 0.3s ease;
 }
 
+.btn-clic {
+    background-color: #0b2a3b;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-clic:hover{
+    background-color: #005c7f;
+    transform: scale(1.05);
+}
+
+.btn-clic:active {
+    background-color: #0b2a3b;
+    transform: scale(1.02);
+}
+
 .carrusel-control-prev {
     left: 10px;
 }
