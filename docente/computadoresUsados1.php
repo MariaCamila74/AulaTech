@@ -40,7 +40,7 @@ $conn->close();
         <nav class="navbar hidden" id="navbar">
             <ul class="menu">
                 <li><a href="InterfazDocente.php">Inicio</a></li>
-                <li><a href="">Reservar Sala</a></li>
+                <li><a href="reserva.php">Reservar Sala</a></li>
                 <li><a href="historiales.html">Historiales</a></li>
                 <li><a href="actividadesPendientes.php">Actividades</a></li>
                 <li>
