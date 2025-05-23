@@ -15,6 +15,10 @@ if(!isset($_SESSION['Rol'])) {
     }
 }
 
+$sql = "SELECT * FROM computadoresusados";
+$result = $conn->query($sql);
+$conn->close();
+
 ?>
 
 <!DOCTYPE html>
