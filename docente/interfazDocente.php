@@ -46,6 +46,7 @@ if(!isset($_SESSION['Rol'])) {
         </nav>
         <img src="../imagenes/menu.png" alt="NavBar" class="menuH show" id="menuH">
     </header>
+    <br><br><br><br><br>
     <main>
         <div class="container">
             <div class="pin" id="image-container">
@@ -61,6 +62,7 @@ if(!isset($_SESSION['Rol'])) {
             </div>
         </div>
     </main>
+    <br><br><br><br><br>
     <footer>
         <div class="footer-content">
             <div class="footer-info">
