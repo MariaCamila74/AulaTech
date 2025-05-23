@@ -38,8 +38,7 @@ if(!isset($_SESSION['Rol'])) {
             <ul class="menu">
                 <li><a href="InterfazDocente.php">Inicio</a></li>
                 <li><a href="">Reservar Sala</a></li>
-                <li><a href="computadoresUsados1.php">Historial de Computadores</a></li>
-                <li><a href="estudiantes-por-equipo.php">Historiales</a></li>
+                <li><a href="historiales.html">Historiales</a></li>
                 <li><a href="actividadesPendientes.php">Actividades</a></li>
                 <li><a href="restablecerContrasenaD.php">Restablecer Contraseña</a></li>
                 <li><a href="../otros/logout.php" id="logout">Cerrar sesión</a></li>
