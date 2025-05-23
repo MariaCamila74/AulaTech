@@ -103,16 +103,14 @@
                 });
             }
 
-            // Función para calcular la fecha mínima (3 días hábiles, excluyendo domingos)
             function calcularFechaMinima() {
                 const hoy = new Date();
                 let diasAgregados = 0;
                 let fechaMinima = new Date(hoy);
                 
-                // Agregamos 3 días hábiles (excluyendo domingos)
                 while (diasAgregados < 4) {
                     fechaMinima.setDate(fechaMinima.getDate() + 1);
-                    // Si no es domingo (0), contamos como día hábil
+                    
                     if (fechaMinima.getDay() !== 0) {
                         diasAgregados++;
                     }
@@ -145,17 +143,6 @@
             form.addEventListener('submit', function(e) {
                 const selectedDate = new Date(fechaInput.value);
                 const dayOfWeek = selectedDate.getDay(); // 0 es domingo, 6 es sábado
-                
-                // Validar que no sea domingo
-                if (dayOfWeek === 0) {
-                    e.preventDefault();
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'No se permiten reservas los domingos.'
-                    });
-                    return;
-                }
                 
                 // Validar anticipación mínima de 3 días hábiles
                 const hoy = new Date();
