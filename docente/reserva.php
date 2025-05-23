@@ -170,16 +170,6 @@
                         diasHabiles++;
                     }
                 }
-                
-                if (diasHabiles < 4) {
-                    e.preventDefault();
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Debes seleccionar una fecha con al menos 3 días hábiles de anticipación (excluyendo domingos).'
-                    });
-                    return;
-                }
 
                 // Si pasa las validaciones, continuar con el envío
                 const formData = new FormData(this);
@@ -213,21 +203,6 @@
                         text: 'Hubo un problema al procesar la solicitud.'
                     });
                 });
-            });
-
-            // Deshabilitar domingos en el selector de fecha
-            fechaInput.addEventListener('input', function() {
-                const selectedDate = new Date(this.value);
-                const dayOfWeek = selectedDate.getDay();
-                
-                if (dayOfWeek === 0) {
-                    this.value = '';
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Domingo no permitido',
-                        text: 'Por favor selecciona un día entre lunes y sábado.'
-                    });
-                }
             });
         });
     </script>
