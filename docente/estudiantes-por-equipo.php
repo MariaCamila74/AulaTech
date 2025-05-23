@@ -15,10 +15,6 @@ if(!isset($_SESSION['Rol'])) {
     }
 }
 
-$sql = "SELECT * FROM computadoresusados";
-$result = $conn->query($sql);
-$conn->close();
-
 ?>
 
 <!DOCTYPE html>
@@ -144,6 +140,11 @@ $conn->close();
                 });
             </script>
             <div class="container">
+                <?php
+                    $sql = "SELECT * FROM computadoresusados";
+                    $result = $conn->query($sql);
+                    $conn->close();
+                ?>
                 <h2 class="titulo">Uso de los computadores</h2>
                 <table id="data-table">
                     <thead>
