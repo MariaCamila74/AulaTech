@@ -29,6 +29,7 @@
         <img src="../imagenes/menu.png" alt="NavBar" class="menuH show" id="menuH">
     </header>
     <div class="container">
+        <br><br><br><br><br><br>
         <h2 class="titulo">Salas</h2>
         <form id="activityForm" method="POST" action="#" enctype="multipart/form-data">
             <div class="form-group">
@@ -61,6 +62,7 @@
             </tbody>
         </table> -->
     </div>
+    <br><br><br><br><br><br>
 
     <footer>
         <div class="footer-content">
