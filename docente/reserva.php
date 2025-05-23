@@ -171,7 +171,7 @@
                     }
                 }
                 
-                if (diasHabiles < 3) {
+                if (diasHabiles < 4) {
                     e.preventDefault();
                     Swal.fire({
                         icon: 'error',
