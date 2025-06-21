@@ -4,8 +4,8 @@ require "../otros/index.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    $NombreSala = $_POST['NombreSala'];
-    $FechaHora = $_POST['FechaHora'];
+    $Sala = $_POST['NombreSala'];
+    $Fecha = $_POST['FechaHora'];
 
    
     $stmt = $conn->prepare("INSERT INTO sala (NombreSala, FechaHora) VALUES (?, ?)");
@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($stmt === false) {
         $errorConsulta = "Error en la preparación de la consulta: " . $conn->error;
     } else {
-        $stmt->bind_param("ss", $NombreSala, $FechaHora);
+        $stmt->bind_param("ss", $Sala, $Fecha);
 
         
         if ($stmt->execute()) {
@@ -153,7 +153,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
 
             // Configuración del campo de fecha
-            const fechaInput = document.getElementById('FechaEntrega');
+            const fechaInput = document.getElementById('FechaHora');
             const fechaMinima = calcularFechaMinima();
             
             // Formatear para input date (YYYY-MM-DD)
