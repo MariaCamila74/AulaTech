@@ -7,40 +7,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $Sala = $_POST['NombreSala'];
     $Fecha = $_POST['FechaHora'];
 
-    $stmtCheck = $conn->prepare("SELECT COUNT(*) as total FROM sala WHERE NombreSala = ? AND FechaHora = ?");
-    
-    if ($stmtCheck === false) {
-        die("Error en la preparación de la consulta de verificación: " . $conn->error);
-    }
-    
-    $stmtCheck->bind_param("ss", $Sala, $Fecha);
-    $stmtCheck->execute();
-    $result = $stmtCheck->get_result();
-    $row = $result->fetch_assoc();
-    $stmtCheck->close();
-    
-    if ($row['total'] > 0) {
-        // La sala ya está reservada en esa fecha/hora
-        die("Error: La sala '$Sala' ya está reservada para la fecha/hora seleccionada");
-    }
-
-    // Si no está reservada, procedemos con la inserción
+   
     $stmt = $conn->prepare("INSERT INTO sala (NombreSala, FechaHora) VALUES (?, ?)");
     
     if ($stmt === false) {
-        die("Error en la preparación de la consulta: " . $conn->error);
-    }
-    
-    $stmt->bind_param("ss", $Sala, $Fecha);
-
-    if ($stmt->execute()) {
-        echo "Reserva completada con éxito"; 
-        exit();
+        $errorConsulta = "Error en la preparación de la consulta: " . $conn->error;
     } else {
-        die("Error al reservar sala: " . $stmt->error);
+        $stmt->bind_param("ss", $Sala, $Fecha);
+
+        
+        if ($stmt->execute()) {
+            echo("Rserva completada con exito"); 
+            exit();
+        } else {
+            
+            $errorRegistrar = "Error al reservar sala " . $stmt->error;
+        }
+
+        $stmt->close();
     }
 
-    $stmt->close();
     $conn->close();
 }
 ?>
@@ -134,7 +120,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Manejo del menú hamburguesa
             const menuH = document.getElementById("menuH");
             const navbar = document.getElementById("navbar");
 
@@ -151,22 +136,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 });
             }
 
-            // Configuración del calendario
-            const fechaInput = document.getElementById('FechaHora');
-            const hoy = new Date();
-            
-            // 1. Calcular primera fecha disponible (3 días hábiles después de hoy)
-            let fechaMinima = new Date(hoy);
-            let diasAgregados = 0;
-            
-            while (diasAgregados < 3) {
-                fechaMinima.setDate(fechaMinima.getDate() + 1);
-                if (fechaMinima.getDay() !== 0) { // No contar domingos
-                    diasAgregados++;
+            function calcularFechaMinima() {
+                const hoy = new Date();
+                let diasAgregados = 0;
+                let fechaMinima = new Date(hoy);
+                
+                while (diasAgregados < 4) {
+                    fechaMinima.setDate(fechaMinima.getDate() + 1);
+                    
+                    if (fechaMinima.getDay() !== 0) {
+                        diasAgregados++;
+                    }
                 }
+                
+                return fechaMinima;
             }
 
-            // Función para formatear fecha como YYYY-MM-DD
+            // Configuración del campo de fecha
+            const fechaInput = document.getElementById('FechaHora');
+            const fechaMinima = calcularFechaMinima();
+            
+            // Formatear para input date (YYYY-MM-DD)
             const formatDate = (date) => {
                 const d = new Date(date);
                 let month = '' + (d.getMonth() + 1);
@@ -179,89 +169,57 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 return [year, month, day].join('-');
             };
 
-            // Establecer fecha mínima en el input
             fechaInput.min = formatDate(fechaMinima);
-
-            // 2. Validar selección de fecha
-            fechaInput.addEventListener('change', function() {
-                const selectedDate = new Date(this.value);
+            
+            const form = document.getElementById('activityForm');
+            form.addEventListener('submit', function(e) {
+                const selectedDate = new Date(fechaInput.value);
+                const dayOfWeek = selectedDate.getDay();
                 
-                // Validar que no sea domingo
-                if (selectedDate.getDay() === 0) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'No se permiten reservas los domingos'
-                    });
-                    this.value = '';
-                    return;
-                }
+                // Validar anticipación mínima de 3 días hábiles
+                const hoy = new Date();
+                hoy.setHours(0, 0, 0, 0);
                 
-                // Validar anticipación mínima (3 días hábiles)
                 let diasHabiles = 0;
                 let fechaTemp = new Date(hoy);
                 
                 while (fechaTemp < selectedDate) {
                     fechaTemp.setDate(fechaTemp.getDate() + 1);
-                    if (fechaTemp.getDay() !== 0) { // No contar domingos
+                    if (fechaTemp.getDay() !== 0) {
                         diasHabiles++;
                     }
                 }
-                
-                if (diasHabiles < 3) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Debe reservar con al menos 3 días hábiles de anticipación'
-                    });
-                    this.value = '';
-                }
-            });
 
-            // Envío del formulario
-            const form = document.getElementById('activityForm');
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Validar que se haya seleccionado una fecha válida
-                if (!fechaInput.value) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Por favor seleccione una fecha válida'
-                    });
-                    return;
-                }
-
+                // Si pasa las validaciones, continuar con el envío
                 const formData = new FormData(this);
-                
-                fetch('actividadesPendientes.php', {
+
+                fetch('reservas.php', {
                     method: 'POST',
                     body: formData
                 })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Error en la respuesta del servidor');
-                    }
-                    return response.text();
-                })
+                .then(response => response.json())
                 .then(data => {
-                    if (data.includes("Error")) {
-                        throw new Error(data);
+                    if (data.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Éxito',
+                            text: data.message
+                        }).then(() => {
+                            form.reset();
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: data.message
+                        });
                     }
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Éxito',
-                        text: data || 'Reserva completada con éxito'
-                    }).then(() => {
-                        form.reset();
-                    });
                 })
                 .catch(error => {
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
-                        text: error.message || 'Hubo un problema al procesar la reserva'
+                        text: 'Hubo un problema al procesar la solicitud.'
                     });
                 });
             });
