@@ -7,26 +7,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $Sala = $_POST['NombreSala'];
     $Fecha = $_POST['FechaHora'];
 
-   
+    $stmtCheck = $conn->prepare("SELECT COUNT(*) as total FROM sala WHERE NombreSala = ? AND FechaHora = ?");
+    
+    if ($stmtCheck === false) {
+        die("Error en la preparación de la consulta de verificación: " . $conn->error);
+    }
+    
+    $stmtCheck->bind_param("ss", $Sala, $Fecha);
+    $stmtCheck->execute();
+    $result = $stmtCheck->get_result();
+    $row = $result->fetch_assoc();
+    $stmtCheck->close();
+    
+    if ($row['total'] > 0) {
+        // La sala ya está reservada en esa fecha/hora
+        die("Error: La sala '$Sala' ya está reservada para la fecha/hora seleccionada");
+    }
+
+    // Si no está reservada, procedemos con la inserción
     $stmt = $conn->prepare("INSERT INTO sala (NombreSala, FechaHora) VALUES (?, ?)");
     
     if ($stmt === false) {
-        $errorConsulta = "Error en la preparación de la consulta: " . $conn->error;
+        die("Error en la preparación de la consulta: " . $conn->error);
+    }
+    
+    $stmt->bind_param("ss", $Sala, $Fecha);
+
+    if ($stmt->execute()) {
+        echo "Reserva completada con éxito"; 
+        exit();
     } else {
-        $stmt->bind_param("ss", $Sala, $Fecha);
-
-        
-        if ($stmt->execute()) {
-            echo("Rserva completada con exito"); 
-            exit();
-        } else {
-            
-            $errorRegistrar = "Error al reservar sala " . $stmt->error;
-        }
-
-        $stmt->close();
+        die("Error al reservar sala: " . $stmt->error);
     }
 
+    $stmt->close();
     $conn->close();
 }
 ?>
