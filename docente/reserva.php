@@ -179,11 +179,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 return fechaMinima;
             }
 
-            // Configuración del campo de fecha
+            // Configurar fecha mínima
             const fechaInput = document.getElementById('FechaHora');
             const fechaMinima = calcularFechaMinima();
             
-            // Formatear para input date (YYYY-MM-DD)
             const formatDate = (date) => {
                 const d = new Date(date);
                 let month = '' + (d.getMonth() + 1);
@@ -197,27 +196,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             };
 
             fechaInput.min = formatDate(fechaMinima);
-            
+
+            // Manejo del formulario
             const form = document.getElementById('activityForm');
             form.addEventListener('submit', function(e) {
-                const selectedDate = new Date(fechaInput.value);
-                const dayOfWeek = selectedDate.getDay();
-                
-                // Validar anticipación mínima de 3 días hábiles
-                const hoy = new Date();
-                hoy.setHours(0, 0, 0, 0);
-                
-                let diasHabiles = 0;
-                let fechaTemp = new Date(hoy);
-                
-                while (fechaTemp < selectedDate) {
-                    fechaTemp.setDate(fechaTemp.getDate() + 1);
-                    if (fechaTemp.getDay() !== 0) {
-                        diasHabiles++;
-                    }
-                }
+                e.preventDefault(); // ⚠️ Esto evita que recargue la página
 
-                // Si pasa las validaciones, continuar con el envío
                 const formData = new FormData(this);
 
                 fetch('reserva.php', {
@@ -228,17 +212,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     if (!response.ok) {
                         throw new Error('Error en la respuesta del servidor');
                     }
-                    return response.json();
-                })
-                fetch('reserva.php', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Error en la respuesta del servidor');
-                    }
-                    return response.json();
+                    return response.json(); // 👈 Interpreta correctamente el JSON
                 })
                 .then(data => {
                     Swal.fire({
@@ -247,7 +221,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         text: data.message,
                         confirmButtonText: 'Aceptar'
                     }).then(() => {
-                        if (data.success) form.reset();
+                        if (data.success) form.reset(); // Limpia el formulario si fue exitosa
                     });
                 })
                 .catch(error => {
