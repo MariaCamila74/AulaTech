@@ -21,7 +21,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     if ($row['total'] > 0) {
         // La sala ya está reservada en esa fecha/hora
-        die("Error: La sala '$Sala' ya está reservada para la fecha/hora seleccionada");
+        header('Content-Type: application/json');
+        echo json_encode([
+            'success' => false,
+            'message' => 'Error, la sala ya se encuentra reservada'
+        ]);
     }
 
     // Si no está reservada, procedemos con la inserción
