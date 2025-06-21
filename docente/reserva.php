@@ -228,44 +228,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     if (!response.ok) {
                         throw new Error('Error en la respuesta del servidor');
                     }
-                    return response.text();
+                    return response.json();
+                })
+                fetch('reserva.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error en la respuesta del servidor');
+                    }
+                    return response.json();
                 })
                 .then(data => {
-                    // Manejar diferentes respuestas del servidor
-                    if (data.includes("Error: La sala")) {
-                        // Sala ya reservada
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Sala no disponible',
-                            text: data.replace("Error: ", ""),
-                            confirmButtonText: 'Entendido'
-                        });
-                    } 
-                    else if (data.includes("Reserva completada con éxito")) {
-                        // Éxito
-                        Swal.fire({
-                            icon: 'success',
-                            title: '¡Reserva exitosa!',
-                            text: 'La sala ha sido reservada correctamente',
-                            confirmButtonText: 'Aceptar'
-                        }).then(() => {
-                            form.reset();
-                        });
-                    }
-                    else if (data.includes("Error")) {
-                        // Otros errores
-                        throw new Error(data);
-                    }
-                    else {
-                        // Respuesta no reconocida
-                        throw new Error('Respuesta inesperada del servidor');
-                    }
+                    Swal.fire({
+                        icon: data.success ? 'success' : 'error',
+                        title: data.success ? '¡Reserva exitosa!' : 'Sala no disponible',
+                        text: data.message,
+                        confirmButtonText: 'Aceptar'
+                    }).then(() => {
+                        if (data.success) form.reset();
+                    });
                 })
                 .catch(error => {
                     Swal.fire({
                         icon: 'error',
                         title: 'Error en la reserva',
-                        text: error.message.replace("Error: ", ""),
+                        text: error.message,
                         confirmButtonText: 'Entendido'
                     });
                 });
