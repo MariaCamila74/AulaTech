@@ -57,6 +57,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        /* Agrega este estilo para fechas bloqueadas */
+        input[type="date"]:disabled {
+            background-color: #ffdddd;
+            color: #ff0000;
+            border-color: #ff0000;
+        }
+        
+        .date-disabled {
+            color: #ff0000;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -90,24 +103,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="form-group">
                 <label for="FechaHora">Fecha de la reserva</label>
                 <input type="date" id="FechaHora" name="FechaHora" required>
+                <p id="fechasBloqueadasInfo" class="date-disabled" style="display: none;">Las fechas en rojo están reservadas</p>
             </div>
             <button type="submit">Reservar</button>
         </form>
-        <!-- <table>
-            <h2>Reservas Realizadas</h2>
-            <thead>
-                <tr>
-                    <th>Día</th>
-                    <th>Sala</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Undécimos</td>
-                    <td><button onclick="window.location.href='actividadesPend/undecimos.php'">Ver</button></td>
-                </tr>
-            </tbody>
-        </table> -->
     </div>
     <br><br><br><br><br><br>
 
@@ -164,6 +163,54 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
                 
                 return fechaMinima;
+            }
+
+            // Obtener fechas reservadas
+            function obtenerFechasReservadas() {
+                return fetch('obtenerFechasReservadas.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        return data.fechasReservadas;
+                    })
+                    .catch(error => {
+                        console.error('Error al obtener fechas reservadas:', error);
+                        return [];
+                    });
+            }
+            
+            // Función para deshabilitar fechas reservadas
+            async function configurarCalendario() {
+                const fechaInput = document.getElementById('FechaHora');
+                const fechasReservadas = await obtenerFechasReservadas();
+                
+                if (fechasReservadas.length > 0) {
+                    document.getElementById('fechasBloqueadasInfo').style.display = 'block';
+                }
+                
+                // Configurar el evento input para validar fechas
+                fechaInput.addEventListener('input', function() {
+                    const selectedDate = this.value;
+                    
+                    if (fechasReservadas.includes(selectedDate)) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Fecha no disponible',
+                            text: 'La fecha seleccionada ya está reservada. Por favor elija otra fecha.'
+                        });
+                        this.value = '';
+                    }
+                });
+                
+                // Configurar el evento focus para mostrar fechas bloqueadas
+                fechaInput.addEventListener('focus', function() {
+                    this.blur(); // Evitar que el calendario nativo se abra
+                    Swal.fire({
+                        title: 'Fechas no disponibles',
+                        html: 'Las fechas marcadas en rojo están reservadas y no están disponibles.<br><br>' +
+                              'Fechas reservadas: <strong>' + fechasReservadas.join(', ') + '</strong>',
+                        icon: 'info'
+                    });
+                });
             }
 
             // Configuración del campo de fecha
