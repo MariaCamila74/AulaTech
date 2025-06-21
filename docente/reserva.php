@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form id="activityForm" method="POST" action="reserva.php" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="Grupo">Grupo</label>
-                <select name="Grupo" id="Grupo" required>
+                <select name="NombreSala" id="Grupo" required>
                     <option value="" disabled selected>Seleccione la sala que desea reservar</option>
                     <option value="NombreSala">Sala 1</option>
                     <option value="NombreSala">Sala 2</option>
