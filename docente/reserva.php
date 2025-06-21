@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("ss", $Sala, $Fecha);
 
     if ($stmt->execute()) {
-        echo "Reserva completada con éxito"; 
+        $message = "Reserva completada con éxito"; 
         exit();
     } else {
         die("Error al reservar sala: " . $stmt->error);
