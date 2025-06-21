@@ -75,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div class="form-group">
                 <label for="FechaHora">Fecha de la reserva</label>
-                <input type="FechaHora" id="FechaHora" name="FechaHora" required>
+                <input type="date" id="FechaHora" name="FechaHora" required>
             </div>
             <button type="submit">Reservar</button>
         </form>
