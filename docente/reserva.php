@@ -207,33 +207,53 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Si pasa las validaciones, continuar con el envío
                 const formData = new FormData(this);
 
-                fetch('actividadesPendientes.php', {
+                fetch('reserva.php', {
                     method: 'POST',
                     body: formData
                 })
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error en la respuesta del servidor');
+                    }
+                    return response.text();
+                })
                 .then(data => {
-                    if (data.success) {
+                    // Manejar diferentes respuestas del servidor
+                    if (data.includes("Error: La sala")) {
+                        // Sala ya reservada
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Sala no disponible',
+                            text: data.replace("Error: ", ""),
+                            confirmButtonText: 'Entendido'
+                        });
+                    } 
+                    else if (data.includes("Reserva completada con éxito")) {
+                        // Éxito
                         Swal.fire({
                             icon: 'success',
-                            title: 'Éxito',
-                            text: data.message
+                            title: '¡Reserva exitosa!',
+                            text: 'La sala ha sido reservada correctamente',
+                            confirmButtonText: 'Aceptar'
                         }).then(() => {
                             form.reset();
                         });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: data.message
-                        });
+                    }
+                    else if (data.includes("Error")) {
+                        // Otros errores
+                        throw new Error(data);
+                    }
+                    else {
+                        // Respuesta no reconocida
+                        throw new Error('Respuesta inesperada del servidor');
                     }
                 })
                 .catch(error => {
                     Swal.fire({
                         icon: 'error',
-                        title: 'Error',
-                        text: 'Hubo un problema al procesar la solicitud.'
+                        title: 'Error en la reserva',
+                        text: error.message.replace("Error: ", ""),
+                        confirmButtonText: 'Entendido'
                     });
                 });
             });
