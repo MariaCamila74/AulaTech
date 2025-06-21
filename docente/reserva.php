@@ -69,8 +69,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label for="Grupo">Grupo</label>
                 <select name="NombreSala" id="Grupo" required>
                     <option value="" disabled selected>Seleccione la sala que desea reservar</option>
-                    <option value="NombreSala">Sala 1</option>
-                    <option value="NombreSala">Sala 2</option>
+                    <option value="Sala1">Sala 1</option>
+                    <option value="Sala2">Sala 2</option>
                 </select>
             </div>
             <div class="form-group">
