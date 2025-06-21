@@ -34,10 +34,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("ss", $Sala, $Fecha);
 
     if ($stmt->execute()) {
-        $message = "Reserva completada con éxito"; 
+        header('Content-Type: application/json');
+        echo json_encode([
+            'success' => true,
+            'message' => 'Reserva completada con éxito'
+        ]); 
         exit();
     } else {
-        die("Error al reservar sala: " . $stmt->error);
+        header('Content-Type: application/json');
+        echo json_encode([
+            'success' => false,
+            'message' => 'Error al reservar la sala'
+        ]) . $stmt->error;
     }
 
     $stmt->close();
