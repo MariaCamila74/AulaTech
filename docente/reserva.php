@@ -218,19 +218,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
             });
 
-            // 3. Mostrar información al hacer clic
-            fechaInput.addEventListener('focus', function() {
-                Swal.fire({
-                    title: 'Información de reservas',
-                    html: `Fechas disponibles a partir del: <strong>${formatDate(fechaMinima)}</strong><br><br>
-                        <u>Restricciones:</u><br>
-                        - No domingos<br>
-                        - Mínimo 3 días hábiles de anticipación`,
-                    icon: 'info',
-                    confirmButtonText: 'Entendido'
-                });
-            });
-
             // Envío del formulario
             const form = document.getElementById('activityForm');
             form.addEventListener('submit', function(e) {
