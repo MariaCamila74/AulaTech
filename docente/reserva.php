@@ -1,3 +1,36 @@
+<?php
+session_start();
+require "../otros/index.php";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
+    $NombreSala = $_POST['NombreSala'];
+    $FechaHora = $_POST['FechaHora'];
+
+   
+    $stmt = $conn->prepare("INSERT INTO sala (NombreSala, FechaHora) VALUES (?, ?)");
+    
+    if ($stmt === false) {
+        $errorConsulta = "Error en la preparación de la consulta: " . $conn->error;
+    } else {
+        $stmt->bind_param("ss", $NombreSala, $FechaHora);
+
+        
+        if ($stmt->execute()) {
+            echo("Rserva completada con exito"); 
+            exit();
+        } else {
+            
+            $errorRegistrar = "Error al reservar sala " . $stmt->error;
+        }
+
+        $stmt->close();
+    }
+
+    $conn->close();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -31,18 +64,18 @@
     <div class="container">
         <br><br><br><br><br><br>
         <h2 class="titulo">Salas</h2>
-        <form id="activityForm" method="POST" action="#" enctype="multipart/form-data">
+        <form id="activityForm" method="POST" action="reserva.php" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="Grupo">Grupo</label>
                 <select name="Grupo" id="Grupo" required>
                     <option value="" disabled selected>Seleccione la sala que desea reservar</option>
-                    <option value="">Sala 1</option>
-                    <option value="">Sala 2</option>
+                    <option value="NombreSala">Sala 1</option>
+                    <option value="NombreSala">Sala 2</option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="FechaEntrega">Fecha de la reserva</label>
-                <input type="date" id="FechaEntrega" name="FechaEntrega" required>
+                <label for="FechaHora">Fecha de la reserva</label>
+                <input type="FechaHora" id="FechaHora" name="FechaHora" required>
             </div>
             <button type="submit">Reservar</button>
         </form>
@@ -138,11 +171,10 @@
 
             fechaInput.min = formatDate(fechaMinima);
             
-            // Validar que no sea domingo y cumpla con la anticipación al enviar el formulario
             const form = document.getElementById('activityForm');
             form.addEventListener('submit', function(e) {
                 const selectedDate = new Date(fechaInput.value);
-                const dayOfWeek = selectedDate.getDay(); // 0 es domingo, 6 es sábado
+                const dayOfWeek = selectedDate.getDay();
                 
                 // Validar anticipación mínima de 3 días hábiles
                 const hoy = new Date();
@@ -153,7 +185,7 @@
                 
                 while (fechaTemp < selectedDate) {
                     fechaTemp.setDate(fechaTemp.getDate() + 1);
-                    if (fechaTemp.getDay() !== 0) { // No contar domingos
+                    if (fechaTemp.getDay() !== 0) {
                         diasHabiles++;
                     }
                 }
