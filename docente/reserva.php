@@ -57,19 +57,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <style>
-        /* Agrega este estilo para fechas bloqueadas */
-        input[type="date"]:disabled {
-            background-color: #ffdddd;
-            color: #ff0000;
-            border-color: #ff0000;
-        }
-        
-        .date-disabled {
-            color: #ff0000;
-            font-weight: bold;
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -103,10 +90,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="form-group">
                 <label for="FechaHora">Fecha de la reserva</label>
                 <input type="date" id="FechaHora" name="FechaHora" required>
-                <p id="fechasBloqueadasInfo" class="date-disabled" style="display: none;">Las fechas en rojo están reservadas</p>
             </div>
             <button type="submit">Reservar</button>
         </form>
+        <!-- <table>
+            <h2>Reservas Realizadas</h2>
+            <thead>
+                <tr>
+                    <th>Día</th>
+                    <th>Sala</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Undécimos</td>
+                    <td><button onclick="window.location.href='actividadesPend/undecimos.php'">Ver</button></td>
+                </tr>
+            </tbody>
+        </table> -->
     </div>
     <br><br><br><br><br><br>
 
@@ -133,6 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Manejo del menú hamburguesa
             const menuH = document.getElementById("menuH");
             const navbar = document.getElementById("navbar");
 
@@ -149,75 +151,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 });
             }
 
-            function calcularFechaMinima() {
-                const hoy = new Date();
-                let diasAgregados = 0;
-                let fechaMinima = new Date(hoy);
-                
-                while (diasAgregados < 4) {
-                    fechaMinima.setDate(fechaMinima.getDate() + 1);
-                    
-                    if (fechaMinima.getDay() !== 0) {
-                        diasAgregados++;
-                    }
-                }
-                
-                return fechaMinima;
-            }
-
-            // Obtener fechas reservadas
-            function obtenerFechasReservadas() {
-                return fetch('obtenerFechasReservadas.php')
-                    .then(response => response.json())
-                    .then(data => {
-                        return data.fechasReservadas;
-                    })
-                    .catch(error => {
-                        console.error('Error al obtener fechas reservadas:', error);
-                        return [];
-                    });
-            }
-            
-            // Función para deshabilitar fechas reservadas
-            async function configurarCalendario() {
-                const fechaInput = document.getElementById('FechaHora');
-                const fechasReservadas = await obtenerFechasReservadas();
-                
-                if (fechasReservadas.length > 0) {
-                    document.getElementById('fechasBloqueadasInfo').style.display = 'block';
-                }
-                
-                // Configurar el evento input para validar fechas
-                fechaInput.addEventListener('input', function() {
-                    const selectedDate = this.value;
-                    
-                    if (fechasReservadas.includes(selectedDate)) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Fecha no disponible',
-                            text: 'La fecha seleccionada ya está reservada. Por favor elija otra fecha.'
-                        });
-                        this.value = '';
-                    }
-                });
-                
-                // Configurar el evento focus para mostrar fechas bloqueadas
-                fechaInput.addEventListener('focus', function() {
-                    this.blur(); // Evitar que el calendario nativo se abra
-                    Swal.fire({
-                        title: 'Fechas no disponibles',
-                        html: 'Las fechas marcadas en rojo están reservadas y no están disponibles.<br><br>' +
-                              'Fechas reservadas: <strong>' + fechasReservadas.join(', ') + '</strong>',
-                        icon: 'info'
-                    });
-                });
-            }
-
-            // Configuración del campo de fecha
+            // Configuración del calendario
             const fechaInput = document.getElementById('FechaHora');
-            const fechaMinima = calcularFechaMinima();
+            const hoy = new Date();
             
-            // Formatear para input date (YYYY-MM-DD)
+            // 1. Calcular primera fecha disponible (3 días hábiles después de hoy)
+            let fechaMinima = new Date(hoy);
+            let diasAgregados = 0;
+            
+            while (diasAgregados < 3) {
+                fechaMinima.setDate(fechaMinima.getDate() + 1);
+                if (fechaMinima.getDay() !== 0) { // No contar domingos
+                    diasAgregados++;
+                }
+            }
+
+            // Función para formatear fecha como YYYY-MM-DD
             const formatDate = (date) => {
                 const d = new Date(date);
                 let month = '' + (d.getMonth() + 1);
@@ -230,57 +179,102 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 return [year, month, day].join('-');
             };
 
+            // Establecer fecha mínima en el input
             fechaInput.min = formatDate(fechaMinima);
-            
-            const form = document.getElementById('activityForm');
-            form.addEventListener('submit', function(e) {
-                const selectedDate = new Date(fechaInput.value);
-                const dayOfWeek = selectedDate.getDay();
+
+            // 2. Validar selección de fecha
+            fechaInput.addEventListener('change', function() {
+                const selectedDate = new Date(this.value);
                 
-                // Validar anticipación mínima de 3 días hábiles
-                const hoy = new Date();
-                hoy.setHours(0, 0, 0, 0);
+                // Validar que no sea domingo
+                if (selectedDate.getDay() === 0) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'No se permiten reservas los domingos'
+                    });
+                    this.value = '';
+                    return;
+                }
                 
+                // Validar anticipación mínima (3 días hábiles)
                 let diasHabiles = 0;
                 let fechaTemp = new Date(hoy);
                 
                 while (fechaTemp < selectedDate) {
                     fechaTemp.setDate(fechaTemp.getDate() + 1);
-                    if (fechaTemp.getDay() !== 0) {
+                    if (fechaTemp.getDay() !== 0) { // No contar domingos
                         diasHabiles++;
                     }
                 }
+                
+                if (diasHabiles < 3) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Debe reservar con al menos 3 días hábiles de anticipación'
+                    });
+                    this.value = '';
+                }
+            });
 
-                // Si pasa las validaciones, continuar con el envío
+            // 3. Mostrar información al hacer clic
+            fechaInput.addEventListener('focus', function() {
+                Swal.fire({
+                    title: 'Información de reservas',
+                    html: `Fechas disponibles a partir del: <strong>${formatDate(fechaMinima)}</strong><br><br>
+                        <u>Restricciones:</u><br>
+                        - No domingos<br>
+                        - Mínimo 3 días hábiles de anticipación`,
+                    icon: 'info',
+                    confirmButtonText: 'Entendido'
+                });
+            });
+
+            // Envío del formulario
+            const form = document.getElementById('activityForm');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Validar que se haya seleccionado una fecha válida
+                if (!fechaInput.value) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Por favor seleccione una fecha válida'
+                    });
+                    return;
+                }
+
                 const formData = new FormData(this);
-
+                
                 fetch('actividadesPendientes.php', {
                     method: 'POST',
                     body: formData
                 })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Éxito',
-                            text: data.message
-                        }).then(() => {
-                            form.reset();
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: data.message
-                        });
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error en la respuesta del servidor');
                     }
+                    return response.text();
+                })
+                .then(data => {
+                    if (data.includes("Error")) {
+                        throw new Error(data);
+                    }
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Éxito',
+                        text: data || 'Reserva completada con éxito'
+                    }).then(() => {
+                        form.reset();
+                    });
                 })
                 .catch(error => {
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
-                        text: 'Hubo un problema al procesar la solicitud.'
+                        text: error.message || 'Hubo un problema al procesar la reserva'
                     });
                 });
             });
