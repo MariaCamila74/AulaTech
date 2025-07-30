@@ -284,7 +284,7 @@ h2::after {
 }
 
 .service-card li {
-    margin: 0 20px;
+    margin: 10px,  20px;
 }
 
 .service-card a {
@@ -293,7 +293,7 @@ h2::after {
     padding: 10px 20px;
     font-size: 18px;
     font-family: 'Arial', sans-serif;
-    color: #ffffff;
+    color: #000000;
     text-decoration: none;
     border-radius: 20px;
     transition: background-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
