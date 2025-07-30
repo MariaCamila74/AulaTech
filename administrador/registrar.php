@@ -66,7 +66,7 @@ if(!isset($_SESSION['Rol'])) {
                 <h3>Estudiante</h3>
                 <p>Los estudiantes podrán interactuar más con los docentes, teniendo está plataforma como un aliado para
                     entregrar más eficazmenete sus trabajos, además los estudiantes de décimo y undécimo podrán acceder a 
-                    beneficios como la alfabetización. <br> <button><a href="Docente.php"></a></button> </p>
+                    beneficios como la alfabetización. <br> <li><a href="Docente.php"></a></li> </p>
             </div>
         </div>
     </main>
