@@ -48,28 +48,28 @@ if(!isset($_SESSION['Rol'])) {
         <img src="../imagenes/menu.png" alt="NavBar" class="menuH show" id="menuH">
     </header>
     <main>
-        <h2>Servicios</h2>
+        <h2>¿A quién deseas registrar?</h2>
         <div class="service-container">
             <div class="service-card">
                 <div class="icon"><img src="../imagenes/Mantenimiento.png" alt="Mantenimiento Icono"></div>
-                <h3>Mantenimiento de Sala de Informática</h3>
-                <p>Los alfabetizadores harán un mantenimiento regular (Cada 6 meses) donde se revise la funcionalidad y
-                    estados de los equipos de computación, con el fin de descartar los que no están en buen estado e
-                    implementar pautas del cuidado de los computadores.</p>
+                <h3>Administrador</h3>
+                <p>Los administradores tendrán el control total de los apartados; podrán rechazar o aceptar alguna
+                    reservación de las salas de informática, registrar a las diferentes personas para los diferentes
+                    apartados, entre otras funciones. </p>
             </div>
             <div class="service-card">
                 <div class="icon-1"><img src="../imagenes/Vacantes.png" alt="Alfabetización Icono"></div>
-                <h3>Vacantes de Alfabetización para Mantenimiento</h3>
-                <p>AulaTech ofrece una espacio para estudiantes de especialidad donde podrán cumplir con sus
-                    responsabilidades y adquirir nuevos conocimientos del cuidado de los equipos infromáticos por medio
-                    del mantenimiento de los equipos.</p>
+                <h3>Docente</h3>
+                <p>Los docentes podrán interactuar más con los estudiantes, subiendo guías o trabajos,
+                    al mismo tiempo los estudiantes podrán responder con sus trabajos a estás asignaciones, además podrán
+                    tener un control de los equipos de la sala, entre otros. </p>
             </div>
             <div class="service-card">
                 <div class="icon"><img src="../imagenes/Computadores.png" alt="Préstamo Icono"></div>
-                <h3>Disponibilidad de la sala de informática</h3>
-                <p>Está página, contará con un apartado de docentes, el cual incluirá una tabla de disponibilidad y
-                    horarios de la sala de informática, con el fin de abrir espacios a profesores externos al área y
-                    puedan hacer actividades allí.</p>
+                <h3>Estudiante</h3>
+                <p>Los estudiantes podrán interactuar más con los docentes, teniendo está plataforma como un aliado para
+                    entregrar más eficazmenete sus trabajos, además los estudiantes de décimo y undécimo podrán acceder a 
+                    beneficios como la alfabetización </p>
             </div>
         </div>
     </main>
