@@ -52,21 +52,22 @@ if(!isset($_SESSION['Rol'])) {
                 <h3>Administrador</h3>
                 <p>Los administradores tendrán el control total de los apartados; podrán rechazar o aceptar alguna
                     reservación de las salas de informática, registrar a las diferentes personas para los diferentes
-                    apartados, entre otras funciones. <br> <li><a href="Administrador.php"></a></li></p>
+                    apartados, entre otras funciones. </p>
+                    <li><a href="Administrador.php"></a></li>
             </div>
             <div class="service-card">
                 <div class="icon-1"><img src="../imagenes/Vacantes.png" alt="Alfabetización Icono"></div>
                 <h3>Docente</h3>
                 <p>Los docentes podrán interactuar más con los estudiantes, subiendo guías o trabajos,
                     al mismo tiempo los estudiantes podrán responder con sus trabajos a estás asignaciones, además podrán
-                    tener un control de los equipos de la sala, entre otros. <br> <li><a href="Estudiante.php"></a></li> </p>
+                    tener un control de los equipos de la sala, entre otros. </p>
             </div>
             <div class="service-card">
                 <div class="icon"><img src="../imagenes/Computadores.png" alt="Préstamo Icono"></div>
                 <h3>Estudiante</h3>
                 <p>Los estudiantes podrán interactuar más con los docentes, teniendo está plataforma como un aliado para
                     entregrar más eficazmenete sus trabajos, además los estudiantes de décimo y undécimo podrán acceder a 
-                    beneficios como la alfabetización. <br> <button type="button"><a href="Docente.php"></a></button> </p>
+                    beneficios como la alfabetización. </p>
             </div>
         </div>
     </main>
