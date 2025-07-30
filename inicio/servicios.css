@@ -283,48 +283,6 @@ h2::after {
     background-color: rgba(0, 0, 0, 0.8);
 }
 
-.service-card li {
-    margin: 0 20px;
-}
-
-.service-card a {
-    position: relative;
-    display: block;
-    padding: 10px 20px;
-    font-size: 18px;
-    font-family: 'Arial', sans-serif;
-    color: #000000;
-    text-decoration: none;
-    border-radius: 20px;
-    transition: background-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
-    overflow: hidden;
-}
-
-.service-card a::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    width: 0;
-    height: 3px;
-    background: #00f5e0;
-    transition: width 0.3s, left 0.3s;
-    transform: translateX(-50%);
-}
-
-.service-card a:hover::before {
-    width: 100%;
-    left: 0;
-}
-
-.service-card a:hover {
-    color: #00f5e0;
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-    background-color: rgba(0,0,0,0.1);
-}
-
-
 footer {
     background: linear-gradient(135deg, #0b2a3b, #005c7f);
     color: #ffffff;

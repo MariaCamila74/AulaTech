@@ -53,7 +53,7 @@ if(!isset($_SESSION['Rol'])) {
                 <p>Los administradores tendrán el control total de los apartados; podrán rechazar o aceptar alguna
                     reservación de las salas de informática, registrar a las diferentes personas para los diferentes
                     apartados, entre otras funciones. </p>
-                    <li><a href="Administrador.php"></a></li>
+                <button><a href="Docente.php"></a></button>
             </div>
             <div class="service-card">
                 <div class="icon-1"><img src="../imagenes/Vacantes.png" alt="Alfabetización Icono"></div>
