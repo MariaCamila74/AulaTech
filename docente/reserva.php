@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header('Content-Type: application/json');
         echo json_encode([
             'success' => false,
-            'message' => 'Error, la sala ya se encuentra reservada'
+            'message' => 'La sala ya se encuentra reservada, si desea reservar para este día intenta con la Sala 2'
         ]);
         exit();
     }
@@ -200,7 +200,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Manejo del formulario
             const form = document.getElementById('activityForm');
             form.addEventListener('submit', function(e) {
-                e.preventDefault(); // ⚠️ Esto evita que recargue la página
+                e.preventDefault();
 
                 const formData = new FormData(this);
 
@@ -212,7 +212,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     if (!response.ok) {
                         throw new Error('Error en la respuesta del servidor');
                     }
-                    return response.json(); // 👈 Interpreta correctamente el JSON
+                    return response.json();
                 })
                 .then(data => {
                     Swal.fire({

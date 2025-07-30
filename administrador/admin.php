@@ -38,9 +38,10 @@ if(!isset($_SESSION['Rol'])) {
         <nav class="navbar hidden" id="navbar">
             <ul class="menu">
                 <li><a href="admin.php">Inicio</a></li>
-                <!-- <li><a href="Administrador.php">Agregar Administrador</a></li> -->
+                <!-- <li><a href="Administrador.php">Agregar Administrador</a></li>
                 <li><a href="Estudiante.php">Estudiantes</a></li>
-                <li><a href="Docente.php">Docentes</a></li>
+                <li><a href="Docente.php">Docentes</a></li> -->
+                <li><a href="#">Registrar</a></li>
                 <li><a href="../otros/logout.php" id="logout">Cerrar sesión</a></li>
             </ul>
         </nav>
@@ -66,8 +67,6 @@ if(!isset($_SESSION['Rol'])) {
             <div class="footer-info">
                 <div class="footer-section">
                     <h4>Nombres de creadores</h4>
-                    <p>Mesa Toro Juan Camilo</p>
-                    <p>Monsalve Lopera Josué</p>
                     <p>Muñoz Arteaga Miller Santiago</p>
                     <p>Ortiz Maria Camila</p>
                 </div>

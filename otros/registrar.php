@@ -1,3 +1,22 @@
+<?php
+
+session_start();
+
+if(!isset($_SESSION['Rol'])) {
+    header('Location: ../inicio/iniciosesion.php');
+    exit();
+}else if(isset($_SESSION['Rol'])){
+    if($_SESSION['Rol']==='Estudiante'){
+        header('Location: ../estudiante/interfazEstudiante.php');
+        exit();
+    }else if($_SESSION['Rol']==='Docente'){
+        header('Location: ../docente/interfazDocente.php');
+        exit();
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -5,9 +24,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Servicios</title>
-    <link rel="stylesheet" href="servicios.css">
+    <link rel="stylesheet" href="../inicio/servicios.css">
     <script src="inicio.js"></script>
-    <script src="../otros/carrusel.js"></script>
+    <script src="carrusel.js"></script>
     <link rel="shortcut icon" href="../imagenes/Logo1.png" type="image/x-icon">
 </head>
 
