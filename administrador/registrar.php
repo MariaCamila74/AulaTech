@@ -24,7 +24,7 @@ if(!isset($_SESSION['Rol'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Servicios</title>
-    <link rel="stylesheet" href="../inicio/servicios.css">
+    <link rel="stylesheet" href="../otros/servicios.css">
     <script src="inicio.js"></script>
     <script src="carrusel.js"></script>
     <link rel="shortcut icon" href="../imagenes/Logo1.png" type="image/x-icon">

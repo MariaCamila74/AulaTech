@@ -41,7 +41,7 @@ if(!isset($_SESSION['Rol'])) {
                 <!-- <li><a href="Administrador.php">Agregar Administrador</a></li>
                 <li><a href="Estudiante.php">Estudiantes</a></li>
                 <li><a href="Docente.php">Docentes</a></li> -->
-                <li><a href="../otros/registrar.php">Registrar</a></li>
+                <li><a href="registrar.php">Registrar</a></li>
                 <li><a href="../otros/logout.php" id="logout">Cerrar sesión</a></li>
             </ul>
         </nav>
