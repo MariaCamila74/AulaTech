@@ -37,11 +37,12 @@ if(!isset($_SESSION['Rol'])) {
         </div>
         <nav class="navbar hidden" id="navbar">
             <ul class="menu">
-                <li><a href="../index.html">Inicio</a></li>
-                <li><a href="servicios.html">Servicios</a></li>
-                <li><a href="contactanos.php">Contáctanos</a></li>
-                <li><a href="iniciosesion.php">Iniciar Sesion</a></li>
-                <li><a href="registrarse.html">Registrarse</a></li>
+                <li><a href="admin.php">Inicio</a></li>
+                <!-- <li><a href="Administrador.php">Agregar Administrador</a></li>
+                <li><a href="Estudiante.php">Estudiantes</a></li>
+                <li><a href="Docente.php">Docentes</a></li> -->
+                <li><a href="registrar.php">Registrar</a></li>
+                <li><a href="../otros/logout.php" id="logout">Cerrar sesión</a></li>
             </ul>
         </nav>
         <img src="../imagenes/menu.png" alt="NavBar" class="menuH show" id="menuH">
