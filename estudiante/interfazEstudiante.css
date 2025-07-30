@@ -1,13 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Felipa&family=Gupter:wght@400;500;700&family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap');
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    list-style: none;
-    text-decoration: none;
-}
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
 body {
     margin: 0;
@@ -21,16 +13,17 @@ header {
     background: linear-gradient(135deg, #0b2a3b, #005c7f);
     color: #ffffff;
     padding: 15px 10px;
-    position: relative;
-    width: 100%;
-    top: 0;
-    left: 0;
+    position: fixed;
+    width: 90%;
+    top: 3%;
+    left: 5%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     z-index: 9999;
     transition: background-color 0.3s;
+    border-radius: 40px;
 }
 
 .logo-nombre {
@@ -59,23 +52,6 @@ header {
     width: 100%;
 }
 
-select li {
-    margin: 0 20px;
-}
-
-select a {
-    position: relative;
-    display: block;
-    padding: 10px 20px;
-    font-size: 18px;
-    font-family: 'Arial', sans-serif;
-    color: #ffffff;
-    text-decoration: none;
-    border-radius: 20px;
-    transition: background-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
-    overflow: hidden;
-}
-
 .menu {
     list-style: none;
     margin: 0;
@@ -102,7 +78,7 @@ select a {
 
 .menu a::before {
     content: '';
-    position: relative;
+    position: absolute;
     left: 50%;
     bottom: 0;
     width: 0;
@@ -122,6 +98,10 @@ select a {
     transform: scale(1.05);
     box-shadow: 0 6px 12px rgba(0,0,0,0.3);
     background-color: rgba(0,0,0,0.1);
+}
+
+header.scrolled {
+    background: linear-gradient(135deg, #004d6e, #002d3a);
 }
 
 .estudiante {
