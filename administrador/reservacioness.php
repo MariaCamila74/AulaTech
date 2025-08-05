@@ -103,12 +103,61 @@ if(!isset($_SESSION['Rol'])) {
                     </tbody>
                 </table>
             </div>
-            </div>
             <div class="service-card">
                 <h3>Sala 2</h3>
-                <p>Los administradores tendrán el control total de los apartados; podrán rechazar o aceptar alguna
-                    reservación de las salas de informática, registrar a las diferentes personas para los diferentes
-                    apartados, entre otras funciones. </p>
+                <div class="sala1">
+                    <?php
+                    include ('../otros/index.php');
+                        $sql = "SELECT * FROM sala WHERE NombreSala = 'Sala2'";
+                        $result = $conn->query($sql); 
+                    ?>
+                <table id="datosTabla">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre Titular</th>
+                            <th>Fecha de Reserva</th>
+                            <th>   </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<tr>";
+                                    echo "<td>" . htmlspecialchars($row['ID_SALA']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($row['NombreTitular']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($row['FechaHora']) . "</td>";
+                                    echo "<td>";
+
+                                    if ($row['Estado'] === 'Confirmada') {
+                                        echo "<span style='color: green; font-weight: bold;'>Confirmada</span>";
+                                    } elseif ($row['Estado'] === 'Denegada') {
+                                        echo "<span style='color: red; font-weight: bold;'>Denegada</span>";
+                                    } else {
+                                        // Botones si está pendiente
+                                        echo "
+                                        <form method='POST' action='procesar_reserva.php' style='display:inline;'>
+                                            <input type='hidden' name='id_sala' value='" . $row['ID_SALA'] . "'>
+                                            <input type='hidden' name='accion' value='confirmar'>
+                                            <button type='submit'>Confirmar</button>
+                                        </form>
+                                        <form method='POST' action='procesar_reserva.php' style='display:inline; margin-left: 5px;'>
+                                            <input type='hidden' name='id_sala' value='" . $row['ID_SALA'] . "'>
+                                            <input type='hidden' name='accion' value='denegar'>
+                                            <button type='submit'>Denegar</button>
+                                        </form>";
+                                    }
+
+                                    echo "</td></tr>";
+                                }
+                            } else {
+                                echo "<tr><td colspan='4'>No hay datos registrados</td></tr>";
+                            }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
             </div>
         </div>
     </main>
