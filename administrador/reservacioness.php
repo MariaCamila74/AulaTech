@@ -46,15 +46,21 @@ if(!isset($_SESSION['Rol'])) {
         <img src="../imagenes/menu.png" alt="NavBar" class="menuH show" id="menuH">
     </header>
     <main>
-        <h2>¿A quién deseas registrar?</h2>
+        <h2>Rersevaciones</h2>
         <div class="service-container">
             <div class="service-card">
                 <div class="icon"><img src="../imagenes/Mantenimiento.png" alt="Mantenimiento Icono"></div>
-                <h3>Administrador</h3>
+                <h3>Sala 1r</h3>
                 <p>Los administradores tendrán el control total de los apartados; podrán rechazar o aceptar alguna
                     reservación de las salas de informática, registrar a las diferentes personas para los diferentes
                     apartados, entre otras funciones. </p>
-                <button><a href="Docente.php"></a></button>
+            </div>
+            <div class="service-card">
+                <div class="icon"><img src="../imagenes/Mantenimiento.png" alt="Mantenimiento Icono"></div>
+                <h3>Sala 2</h3>
+                <p>Los administradores tendrán el control total de los apartados; podrán rechazar o aceptar alguna
+                    reservación de las salas de informática, registrar a las diferentes personas para los diferentes
+                    apartados, entre otras funciones. </p>
             </div>
         </div>
     </main>
