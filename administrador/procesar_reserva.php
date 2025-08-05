@@ -3,8 +3,8 @@ include('../otros/index.php');
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $id_sala = $_POST['ID_SALA'];
-    $accion = $_POST['Estado'];
+    $id_sala = $_POST['id_sala'];
+    $accion = $_POST['accion'];
 
     // Obtener info de la reserva
     $stmt = $conn->prepare("SELECT NombreTitular, Correo FROM sala WHERE ID_SALA = ?");
@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         mail($correo, $asunto, $mensaje, "From: noreply@tusistema.com");
     }
 
-    header("Location: admin.php");
+    header("Location: reservacioness.php");
     exit();
 }
 ?>
