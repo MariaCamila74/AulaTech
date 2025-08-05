@@ -4,7 +4,7 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $id_sala = $_POST['ID_SALA'];
-    $accion = $_POST['accion'];
+    $accion = $_POST['Estado'];
 
     // Obtener info de la reserva
     $stmt = $conn->prepare("SELECT NombreTitular, Correo FROM sala WHERE ID_SALA = ?");
