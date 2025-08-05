@@ -103,6 +103,7 @@ if(!isset($_SESSION['Rol'])) {
                     </tbody>
                 </table>
             </div>
+            </div>
             <div class="service-card">
                 <h3>Sala 2</h3>
                 <div class="sala1">
