@@ -50,48 +50,37 @@ if(!isset($_SESSION['Rol'])) {
         <div class="service-container">
             <div class="service-card">
                 <h3>Sala 1</h3>
-                <table>
-                <thead>
+                <div class="sala1">
+                    <?php
+                        $sql = "SELECT * FROM sala WHERE NombreSala = 'Sala 1'";
+                        $result = $conn->query($sql); 
+                    ?>
+                <table id="datosTabla">
                     <tr>
-                        <th>Grado</th>
-                        <th>Ver más</th>
+                        <th>ID</th>
+                        <th>Nombre Titular</th>
+                        <th>Fecha de Reserva</th>
+                        <th>   </th>
                     </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Cuartos</td>
-                        <td><button onclick="window.location.href='cuarto.php'">Ver</button></td>
-                    </tr>
-                    <tr>
-                        <td>Quintos</td>
-                        <td><button onclick="window.location.href='quinto.php'">Ver</button></td>
-                    </tr>
-                    <tr>
-                        <td>Sextos</td>
-                        <td><button onclick="window.location.href='sexto.php'">Ver</button></td>
-                    </tr>
-                    <tr>
-                        <td>Septimos</td>
-                        <td><button onclick="window.location.href='septimo.php'">Ver</button></td>
-                    </tr>
-                    <tr>
-                        <td>Octavos</td>
-                        <td><button onclick="window.location.href='octavo.php'">Ver</button></td>
-                    </tr>
-                    <tr>
-                        <td>Novenos</td>
-                        <td><button onclick="window.location.href='noveno.php'">Ver</button></td>
-                    </tr>
-                    <tr>
-                        <td>Décimos</td>
-                        <td><button onclick="window.location.href='decimo.php'">Ver</button></td>
-                    </tr>
-                    <tr>
-                        <td>Undécimo</td>
-                        <td><button onclick="window.location.href='undecimo.php'">Ver</button></td>
-                    </tr>
-                </tbody>
-            </table>
+                    <tbody>
+                        <?php
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<tr>";
+                                    echo "<td>" . htmlspecialchars($row['ID_Sala']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($row['NombreTitular']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($row['FechaHora']) . "</td>";
+                                    // echo "<td>" . htmlspecialchars($row['MarcaComputador']) . "</td>";
+                                    echo "<td><a href='eliminar.php?ID=" . $row['ID'] . ");'><button>Eliminar</button></a></td>";
+                                    echo "</tr>";
+                                }
+                            } else {
+                                echo "<tr><td colspan='4'>No hay datos registrados</td></tr>";
+                            }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
             </div>
             <div class="service-card">
                 <h3>Sala 2</h3>

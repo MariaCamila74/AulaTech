@@ -6,6 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     $Sala = $_POST['NombreSala'];
     $Fecha = $_POST['FechaHora'];
+    $Nombre = $_POST['NombreTitular'];
 
     $stmtCheck = $conn->prepare("SELECT COUNT(*) as total FROM sala WHERE NombreSala = ? AND FechaHora = ?");
     
@@ -30,13 +31,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Si no está reservada, procedemos con la inserción
-    $stmt = $conn->prepare("INSERT INTO sala (NombreSala, FechaHora) VALUES (?, ?)");
+    $stmt = $conn->prepare("INSERT INTO sala (NombreSala, NombreTitular, FechaHora) VALUES (?, ?, ?)");
     
     if ($stmt === false) {
         die("Error en la preparación de la consulta: " . $conn->error);
     }
     
-    $stmt->bind_param("ss", $Sala, $Fecha);
+    $stmt->bind_param("sss", $Sala, $Nombre, $Fecha);
 
     if ($stmt->execute()) {
         header('Content-Type: application/json');
@@ -99,6 +100,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <option value="Sala1">Sala 1</option>
                     <option value="Sala2">Sala 2</option>
                 </select>
+            </div>
+            <div class="form-group">
+                <label for="NombreTitular">Fecha de la reserva</label>
+                <input type="text" id="NombreTitular" name="NombreTitular" required>
             </div>
             <div class="form-group">
                 <label for="FechaHora">Fecha de la reserva</label>
