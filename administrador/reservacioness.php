@@ -52,6 +52,7 @@ if(!isset($_SESSION['Rol'])) {
                 <h3>Sala 1</h3>
                 <div class="sala1">
                     <?php
+                    include ('../otros/index.php');
                         $sql = "SELECT * FROM sala WHERE NombreSala = 'Sala 1'";
                         $result = $conn->query($sql); 
                     ?>
