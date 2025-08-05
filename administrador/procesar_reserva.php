@@ -35,11 +35,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $mensaje = "Hola $nombre,\nTu reserva ha sido denegada.\nPara más información, comunícate con el administrador.";
     }
 
-    // Enviar correo si es válido
-    if (filter_var($correo, FILTER_VALIDATE_EMAIL)) {
-        mail($correo, $asunto, $mensaje, "From: pepiperezto336@gmail.com");
-    }
-
     header("Location: reservacioness.php");
     exit();
 }

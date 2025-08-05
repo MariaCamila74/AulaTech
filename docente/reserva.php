@@ -92,30 +92,87 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </header>
     <div class="container">
         <br><br><br><br><br><br>
-        <h2 class="titulo">Salas</h2>
-        <form id="activityForm" method="POST" action="reserva.php" enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="Grupo">Grupo</label>
-                <select name="NombreSala" id="Grupo" required>
-                    <option value="" disabled selected>Seleccione la sala que desea reservar</option>
-                    <option value="Sala1">Sala 1</option>
-                    <option value="Sala2">Sala 2</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="NombreTitular">Nombre del Titular</label>
-                <input type="text" id="NombreTitular" name="NombreTitular" required>
-            </div>
-            <div class="form-group">
-                <label for="Correo">Correo Eléctronico</label>
-                <input type="text" id="Correo" name="Correo" required>
-            </div>
-            <div class="form-group">
-                <label for="FechaHora">Fecha de la reserva</label>
-                <input type="date" id="FechaHora" name="FechaHora" required>
-            </div>
-            <button type="submit">Reservar</button>
-        </form>
+        <div class="container">
+            <h2 class="titulo">Salas</h2>
+            <form id="activityForm" method="POST" action="reserva.php" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="Grupo">Grupo</label>
+                    <select name="NombreSala" id="Grupo" required>
+                        <option value="" disabled selected>Seleccione la sala que desea reservar</option>
+                        <option value="Sala1">Sala 1</option>
+                        <option value="Sala2">Sala 2</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="NombreTitular">Nombre del Titular</label>
+                    <input type="text" id="NombreTitular" name="NombreTitular" required>
+                </div>
+                <div class="form-group">
+                    <label for="Correo">Correo Eléctronico</label>
+                    <input type="text" id="Correo" name="Correo" required>
+                </div>
+                <div class="form-group">
+                    <label for="FechaHora">Fecha de la reserva</label>
+                    <input type="date" id="FechaHora" name="FechaHora" required>
+                </div>
+                <button type="submit">Reservar</button>
+            </form>
+        </div>
+        <div class="container">
+            <h3>Sala 1</h3>
+                <div class="sala1">
+                    <?php
+                    include ('../otros/index.php');
+                        $sql = "SELECT * FROM sala WHERE NombreSala = 'Sala1'";
+                        $result = $conn->query($sql); 
+                    ?>
+                <table id="datosTabla">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre Titular</th>
+                            <th>Fecha de Reserva</th>
+                            <th>   </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<tr>";
+                                    echo "<td>" . htmlspecialchars($row['ID_SALA']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($row['NombreTitular']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($row['FechaHora']) . "</td>";
+                                    echo "<td>";
+
+                                    if ($row['Estado'] === 'Confirmada') {
+                                        echo "<span style='color: green; font-weight: bold;'>Confirmada</span>";
+                                    } elseif ($row['Estado'] === 'Denegada') {
+                                        echo "<span style='color: red; font-weight: bold;'>Denegada</span>";
+                                    } else {
+                                        // Botones si está pendiente
+                                        echo "
+                                        <form method='POST' action='procesar_reserva.php' style='display:inline;'>
+                                            <input type='hidden' name='id_sala' value='" . $row['ID_SALA'] . "'>
+                                            <input type='hidden' name='accion' value='confirmar'>
+                                            <button type='submit'>Confirmar</button>
+                                        </form>
+                                        <form method='POST' action='procesar_reserva.php' style='display:inline; margin-left: 5px;'>
+                                            <input type='hidden' name='id_sala' value='" . $row['ID_SALA'] . "'>
+                                            <input type='hidden' name='accion' value='denegar'>
+                                            <button type='submit'>Denegar</button>
+                                        </form>";
+                                    }
+
+                                    echo "</td></tr>";
+                                }
+                            } else {
+                                echo "<tr><td colspan='4'>No hay datos registrados</td></tr>";
+                            }
+                        ?>
+                    </tbody>
+                </table>
+        </div>
         <!-- <table>
             <h2>Reservas Realizadas</h2>
             <thead>
@@ -228,7 +285,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     Swal.fire({
                         icon: data.success ? 'success' : 'error',
                         title: data.success ? '¡Reserva exitosa!' : 'Sala no disponible',
-                        text: data.message,
+                        text: data.message ? 'La reserva será confirmada a través del correo, si no le llega el correo su reserva fue denegada' : '',
                         confirmButtonText: 'Aceptar'
                     }).then(() => {
                         if (data.success) form.reset(); // Limpia el formulario si fue exitosa
