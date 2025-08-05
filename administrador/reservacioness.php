@@ -46,7 +46,7 @@ if(!isset($_SESSION['Rol'])) {
         <img src="../imagenes/menu.png" alt="NavBar" class="menuH show" id="menuH">
     </header>
     <main>
-        <h2>Rersevaciones</h2>
+        <h2>Reservaciones</h2>
         <div class="service-container">
             <div class="service-card">
                 <h3>Sala 1</h3>
@@ -57,12 +57,14 @@ if(!isset($_SESSION['Rol'])) {
                         $result = $conn->query($sql); 
                     ?>
                 <table id="datosTabla">
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre Titular</th>
-                        <th>Fecha de Reserva</th>
-                        <th>   </th>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre Titular</th>
+                            <th>Fecha de Reserva</th>
+                            <th>   </th>
+                        </tr>
+                    </thead>
                     <tbody>
                         <?php
                             if ($result->num_rows > 0) {
