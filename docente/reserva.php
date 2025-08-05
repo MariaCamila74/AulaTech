@@ -7,6 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $Sala = $_POST['NombreSala'];
     $Fecha = $_POST['FechaHora'];
     $Nombre = $_POST['NombreTitular'];
+    $Correo = $_POST['Correo'];
 
     $stmtCheck = $conn->prepare("SELECT COUNT(*) as total FROM sala WHERE NombreSala = ? AND FechaHora = ?");
     
@@ -31,13 +32,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Si no está reservada, procedemos con la inserción
-    $stmt = $conn->prepare("INSERT INTO sala (NombreSala, NombreTitular, FechaHora) VALUES (?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO sala (NombreSala, NombreTitular, FechaHora, Correo) VALUES (?, ?, ?, ?)");
     
     if ($stmt === false) {
         die("Error en la preparación de la consulta: " . $conn->error);
     }
     
-    $stmt->bind_param("sss", $Sala, $Nombre, $Fecha);
+    $stmt->bind_param("ssss", $Sala, $Nombre, $Fecha, $Correo);
 
     if ($stmt->execute()) {
         header('Content-Type: application/json');
@@ -104,6 +105,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="form-group">
                 <label for="NombreTitular">Fecha de la reserva</label>
                 <input type="text" id="NombreTitular" name="NombreTitular" required>
+            </div>
+            <div class="form-group">
+                <label for="Correo">Correo Eléctronico</label>
+                <input type="text" id="Correo" name="Correo" required>
             </div>
             <div class="form-group">
                 <label for="FechaHora">Fecha de la reserva</label>
