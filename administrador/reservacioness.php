@@ -50,9 +50,48 @@ if(!isset($_SESSION['Rol'])) {
         <div class="service-container">
             <div class="service-card">
                 <h3>Sala 1</h3>
-                <p>Los administradores tendrán el control total de los apartados; podrán rechazar o aceptar alguna
-                    reservación de las salas de informática, registrar a las diferentes personas para los diferentes
-                    apartados, entre otras funciones. </p>
+                <table>
+                <thead>
+                    <tr>
+                        <th>Grado</th>
+                        <th>Ver más</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Cuartos</td>
+                        <td><button onclick="window.location.href='cuarto.php'">Ver</button></td>
+                    </tr>
+                    <tr>
+                        <td>Quintos</td>
+                        <td><button onclick="window.location.href='quinto.php'">Ver</button></td>
+                    </tr>
+                    <tr>
+                        <td>Sextos</td>
+                        <td><button onclick="window.location.href='sexto.php'">Ver</button></td>
+                    </tr>
+                    <tr>
+                        <td>Septimos</td>
+                        <td><button onclick="window.location.href='septimo.php'">Ver</button></td>
+                    </tr>
+                    <tr>
+                        <td>Octavos</td>
+                        <td><button onclick="window.location.href='octavo.php'">Ver</button></td>
+                    </tr>
+                    <tr>
+                        <td>Novenos</td>
+                        <td><button onclick="window.location.href='noveno.php'">Ver</button></td>
+                    </tr>
+                    <tr>
+                        <td>Décimos</td>
+                        <td><button onclick="window.location.href='decimo.php'">Ver</button></td>
+                    </tr>
+                    <tr>
+                        <td>Undécimo</td>
+                        <td><button onclick="window.location.href='undecimo.php'">Ver</button></td>
+                    </tr>
+                </tbody>
+            </table>
             </div>
             <div class="service-card">
                 <h3>Sala 2</h3>
