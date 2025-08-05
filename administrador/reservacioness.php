@@ -49,14 +49,12 @@ if(!isset($_SESSION['Rol'])) {
         <h2>Rersevaciones</h2>
         <div class="service-container">
             <div class="service-card">
-                <div class="icon"><img src="../imagenes/Mantenimiento.png" alt="Mantenimiento Icono"></div>
-                <h3>Sala 1r</h3>
+                <h3>Sala 1</h3>
                 <p>Los administradores tendrán el control total de los apartados; podrán rechazar o aceptar alguna
                     reservación de las salas de informática, registrar a las diferentes personas para los diferentes
                     apartados, entre otras funciones. </p>
             </div>
             <div class="service-card">
-                <div class="icon"><img src="../imagenes/Mantenimiento.png" alt="Mantenimiento Icono"></div>
                 <h3>Sala 2</h3>
                 <p>Los administradores tendrán el control total de los apartados; podrán rechazar o aceptar alguna
                     reservación de las salas de informática, registrar a las diferentes personas para los diferentes
