@@ -53,7 +53,7 @@ if(!isset($_SESSION['Rol'])) {
                 <div class="sala1">
                     <?php
                     include ('../otros/index.php');
-                        $sql = "SELECT * FROM sala WHERE NombreSala = 'Sala 1'";
+                        $sql = "SELECT * FROM sala WHERE NombreSala = 'Sala1'";
                         $result = $conn->query($sql); 
                     ?>
                 <table id="datosTabla">
