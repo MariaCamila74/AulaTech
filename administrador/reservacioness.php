@@ -71,7 +71,7 @@ if(!isset($_SESSION['Rol'])) {
                                     echo "<td>" . htmlspecialchars($row['NombreTitular']) . "</td>";
                                     echo "<td>" . htmlspecialchars($row['FechaHora']) . "</td>";
                                     // echo "<td>" . htmlspecialchars($row['MarcaComputador']) . "</td>";
-                                    echo "<td><a href='eliminar.php?ID=" . $row['ID'] . ");'><button>Eliminar</button></a></td>";
+                                    // echo "<td><a href='eliminar.php?ID=" . $row['ID'] . ");'><button>Eliminar</button></a></td>";
                                     echo "</tr>";
                                 }
                             } else {
