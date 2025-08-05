@@ -103,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </select>
             </div>
             <div class="form-group">
-                <label for="NombreTitular">Fecha de la reserva</label>
+                <label for="NombreTitular">Nombre del Titular</label>
                 <input type="text" id="NombreTitular" name="NombreTitular" required>
             </div>
             <div class="form-group">
