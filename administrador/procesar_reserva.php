@@ -3,40 +3,43 @@ include('../otros/index.php');
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $id_sala = $_POST['id_sala'];
+    $id_sala = $_POST['ID_SALA'];
     $accion = $_POST['accion'];
 
-    // Obtener correo de la persona
-    $sql = "SELECT NombreTitular, Correo FROM sala WHERE ID_Sala = ?";
-    $stmt = $conn->prepare($sql);
+    // Obtener info de la reserva
+    $stmt = $conn->prepare("SELECT NombreTitular, Correo FROM sala WHERE ID_SALA = ?");
     $stmt->bind_param("i", $id_sala);
     $stmt->execute();
-    $resultado = $stmt->get_result();
-    $reserva = $resultado->fetch_assoc();
+    $res = $stmt->get_result();
+    $reserva = $res->fetch_assoc();
 
     $correo = $reserva['Correo'];
     $nombre = $reserva['NombreTitular'];
 
     if ($accion === 'confirmar') {
-        $asunto = "Reserva Confirmada";
-        $mensaje = "Hola $nombre,\nTu reserva ha sido confirmada exitosamente.\nGracias por usar el sistema.";
-    } else if ($accion === 'denegar') {
-        $asunto = "Reserva Denegada";
-        $mensaje = "Hola $nombre,\nTu reserva ha sido denegada. Si tienes preguntas, contacta con el administrador.";
+        // Cambiar estado a Confirmada
+        $stmt = $conn->prepare("UPDATE sala SET Estado = 'Confirmada' WHERE ID_SALA = ?");
+        $stmt->bind_param("i", $id_sala);
+        $stmt->execute();
 
-        // Eliminar la reserva si se deniega
-        $sqlEliminar = "DELETE FROM sala WHERE ID_Sala = ?";
-        $stmtEliminar = $conn->prepare($sqlEliminar);
-        $stmtEliminar->bind_param("i", $id_sala);
-        $stmtEliminar->execute();
+        // Enviar correo
+        $asunto = "Reserva Confirmada";
+        $mensaje = "Hola $nombre,\nTu reserva ha sido confirmada.\n¡Gracias!";
+    } elseif ($accion === 'denegar') {
+        // Cambiar estado a Denegada o eliminar
+        $stmt = $conn->prepare("UPDATE sala SET Estado = 'Denegada' WHERE ID_SALA = ?");
+        $stmt->bind_param("i", $id_sala);
+        $stmt->execute();
+
+        $asunto = "Reserva Denegada";
+        $mensaje = "Hola $nombre,\nTu reserva ha sido denegada.\nPara más información, comunícate con el administrador.";
     }
 
-    // Enviar correo (usando la función mail de PHP)
+    // Enviar correo si es válido
     if (filter_var($correo, FILTER_VALIDATE_EMAIL)) {
         mail($correo, $asunto, $mensaje, "From: noreply@tusistema.com");
     }
 
-    // Redirigir de vuelta a la página principal
     header("Location: admin.php");
     exit();
 }

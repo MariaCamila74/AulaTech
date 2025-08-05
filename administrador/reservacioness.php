@@ -73,8 +73,15 @@ if(!isset($_SESSION['Rol'])) {
                                     echo "<td>" . htmlspecialchars($row['ID_SALA']) . "</td>";
                                     echo "<td>" . htmlspecialchars($row['NombreTitular']) . "</td>";
                                     echo "<td>" . htmlspecialchars($row['FechaHora']) . "</td>";
-                                    // echo "<td>" . htmlspecialchars($row['MarcaComputador']) . "</td>";
-                                    echo "<td>
+                                    echo "<td>";
+
+                                    if ($row['Estado'] === 'Confirmada') {
+                                        echo "<span style='color: green; font-weight: bold;'>Confirmada</span>";
+                                    } elseif ($row['Estado'] === 'Denegada') {
+                                        echo "<span style='color: red; font-weight: bold;'>Denegada</span>";
+                                    } else {
+                                        // Botones si está pendiente
+                                        echo "
                                         <form method='POST' action='procesar_reserva.php' style='display:inline;'>
                                             <input type='hidden' name='id_sala' value='" . $row['ID_SALA'] . "'>
                                             <input type='hidden' name='accion' value='confirmar'>
@@ -84,9 +91,10 @@ if(!isset($_SESSION['Rol'])) {
                                             <input type='hidden' name='id_sala' value='" . $row['ID_SALA'] . "'>
                                             <input type='hidden' name='accion' value='denegar'>
                                             <button type='submit'>Denegar</button>
-                                        </form>
-                                    </td>";
-                                    echo "</tr>";
+                                        </form>";
+                                    }
+
+                                    echo "</td></tr>";
                                 }
                             } else {
                                 echo "<tr><td colspan='4'>No hay datos registrados</td></tr>";
