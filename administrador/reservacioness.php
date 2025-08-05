@@ -70,7 +70,7 @@ if(!isset($_SESSION['Rol'])) {
                             if ($result->num_rows > 0) {
                                 while ($row = $result->fetch_assoc()) {
                                     echo "<tr>";
-                                    echo "<td>" . htmlspecialchars($row['ID_Sala']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($row['ID_SALA']) . "</td>";
                                     echo "<td>" . htmlspecialchars($row['NombreTitular']) . "</td>";
                                     echo "<td>" . htmlspecialchars($row['FechaHora']) . "</td>";
                                     // echo "<td>" . htmlspecialchars($row['MarcaComputador']) . "</td>";
