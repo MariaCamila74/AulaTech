@@ -10,14 +10,6 @@ body {
     position: relative;
 }
 
-.section {
-    background-repeat: no-repeat;
-    background-image: url(../imagenes/FondoPrincipal-01.png);
-    background-size: 100% 100%;
-    height: 41em;
-    margin-top: -2%;
-}
-
 header {
     background: linear-gradient(135deg, #0b2a3b, #005c7f);
     color: #ffffff;
