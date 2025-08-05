@@ -76,12 +76,12 @@ if(!isset($_SESSION['Rol'])) {
                                     // echo "<td>" . htmlspecialchars($row['MarcaComputador']) . "</td>";
                                     echo "<td>
                                         <form method='POST' action='procesar_reserva.php' style='display:inline;'>
-                                            <input type='hidden' name='id_sala' value='" . $row['ID_Sala'] . "'>
+                                            <input type='hidden' name='id_sala' value='" . $row['ID_SALA'] . "'>
                                             <input type='hidden' name='accion' value='confirmar'>
                                             <button type='submit'>Confirmar</button>
                                         </form>
                                         <form method='POST' action='procesar_reserva.php' style='display:inline; margin-left: 5px;'>
-                                            <input type='hidden' name='id_sala' value='" . $row['ID_Sala'] . "'>
+                                            <input type='hidden' name='id_sala' value='" . $row['ID_SALA'] . "'>
                                             <input type='hidden' name='accion' value='denegar'>
                                             <button type='submit'>Denegar</button>
                                         </form>
