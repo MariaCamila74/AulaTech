@@ -56,20 +56,6 @@ if(!isset($_SESSION['Rol'])) {
                     apartados, entre otras funciones. </p>
                 <button><a href="Docente.php"></a></button>
             </div>
-            <div class="service-card">
-                <div class="icon-1"><img src="../imagenes/Vacantes.png" alt="Alfabetización Icono"></div>
-                <h3>Docente</h3>
-                <p>Los docentes podrán interactuar más con los estudiantes, subiendo guías o trabajos,
-                    al mismo tiempo los estudiantes podrán responder con sus trabajos a estás asignaciones, además podrán
-                    tener un control de los equipos de la sala, entre otros. </p>
-            </div>
-            <div class="service-card">
-                <div class="icon"><img src="../imagenes/Computadores.png" alt="Préstamo Icono"></div>
-                <h3>Estudiante</h3>
-                <p>Los estudiantes podrán interactuar más con los docentes, teniendo está plataforma como un aliado para
-                    entregrar más eficazmenete sus trabajos, además los estudiantes de décimo y undécimo podrán acceder a 
-                    beneficios como la alfabetización. </p>
-            </div>
         </div>
     </main>
     <footer>
