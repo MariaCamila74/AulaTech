@@ -141,6 +141,65 @@ header.scrolled {
     margin-left: 20px;
 }
 
+.table-container {
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+.table-container h3{
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.table-container th, .table-container td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.table-container th {
+    background-color: #0b2a3b;
+    color: white;
+}
+
+.table-container tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table-container tr:hover {
+    background-color: #ddd;
+}
+
+.table-container button {
+    background-color: #0b2a3b;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.table-container button:hover {
+    background-color: #005c7f;
+    transform: scale(1.05);
+}
+
+.table-container button:active {
+    background-color: #0b2a3b;
+    transform: scale(1.02);
+}
+
 footer {
     background: linear-gradient(135deg, #0b2a3b, #005c7f);
     color: #ffffff;
