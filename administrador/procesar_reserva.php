@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $id_sala = $_POST['id_sala'];
     $accion = $_POST['accion'];
 
-    // Obtener info de la reserva
+    
     $stmt = $conn->prepare("SELECT NombreTitular, Correo FROM sala WHERE ID_SALA = ?");
     $stmt->bind_param("i", $id_sala);
     $stmt->execute();
@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nombre = $reserva['NombreTitular'];
 
     if ($accion === 'confirmar') {
-        // Cambiar estado a Confirmada
+        
         $stmt = $conn->prepare("UPDATE sala SET Estado = 'Confirmada' WHERE ID_SALA = ?");
         $stmt->bind_param("i", $id_sala);
         $stmt->execute();
@@ -26,8 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $asunto = "Reserva Confirmada";
         $mensaje = "Hola $nombre,\nTu reserva ha sido confirmada.\n¡Gracias!";
     } elseif ($accion === 'denegar') {
-        // Cambiar estado a Denegada o eliminar
-        $stmt = $conn->prepare("UPDATE sala SET Estado = 'Denegada' WHERE ID_SALA = ?");
+        
+        $stmt = $conn->prepare("UPDATE sala SET Estado = 'Denegada' WHERE ID_SALA = ?, UPDATE sala SET FechaHora = '' WHERE ID_sALA");
         $stmt->bind_param("i", $id_sala);
         $stmt->execute();
 
