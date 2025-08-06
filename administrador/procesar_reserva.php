@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $mensaje = "Hola $nombre,\nTu reserva ha sido confirmada.\n¡Gracias!";
     } elseif ($accion === 'denegar') {
         
-        $stmt = $conn->prepare("UPDATE sala SET Estado = 'Denegada' WHERE ID_SALA = ?, UPDATE sala SET FechaHora = '' WHERE ID_sALA");
+        $stmt = $conn->prepare("UPDATE sala SET Estado = 'Denegada' WHERE ID_SALA = ?, UPDATE sala SET FechaHora = '' WHERE ID_SALA");
         $stmt->bind_param("i", $id_sala);
         $stmt->execute();
 
