@@ -208,7 +208,7 @@ footer {
     font-family: 'Arial', sans-serif;
     box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
     margin: 0;
-    margin-top: 20px;
+    margin-bottom: 0;
 }
 
 .footer-content {
