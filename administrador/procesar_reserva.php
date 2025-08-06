@@ -25,16 +25,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // Enviar correo
         $asunto = "Reserva Confirmada";
         $mensaje = "Hola $nombre,\nTu reserva ha sido confirmada.\n¡Gracias!";
+        
     } elseif ($accion === 'denegar') {
         
-        $stmt = $conn->prepare("UPDATE sala SET Estado = 'Denegada' WHERE ID_SALA = ?, UPDATE sala SET FechaHora = '' WHERE ID_SALA");
+        $stmt = $conn->prepare("UPDATE sala SET Estado = 'Denegada' WHERE ID_SALA = ?");
+        $stmt->bind_param("i", $id_sala);
+        $stmt->execute();
+
+        // Limpiar FechaHora
+        $stmt = $conn->prepare("UPDATE sala SET FechaHora = '' WHERE ID_SALA = ?");
         $stmt->bind_param("i", $id_sala);
         $stmt->execute();
 
         $asunto = "Reserva Denegada";
         $mensaje = "Hola $nombre,\nTu reserva ha sido denegada.\nPara más información, comunícate con el administrador.";
     }
-
     header("Location: reservacioness.php");
     exit();
 }
